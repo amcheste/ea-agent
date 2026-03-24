@@ -16,7 +16,7 @@ These skills are designed for use with [Claude](https://claude.ai) in Cowork mod
 | [Inbox Processing](skills/inbox-processing/) | Scans Gmail and Slack for action items, surfaces them in your daily note | Done |
 | [Project Setup](skills/project-setup/) | Creates project notes from templates with proper linking and task breakdown | Done |
 | [Meeting Notes](skills/meeting-notes/) | Creates meeting notes with prep mode, capture mode, and action item tracking | Done |
-| [Task Manager](skills/task-manager/) | Apple Reminders integration with Eisenhower matrix prioritization, synced to vault | Done |
+| [Task Manager](skills/task-manager/) | Apple Reminders + Apple Calendar integration with Eisenhower matrix prioritization, synced to vault | Done |
 
 ### Templates
 
@@ -27,11 +27,27 @@ Obsidian-compatible markdown templates in the `templates/` folder:
 - **meeting-notes.md** — Agenda, notes, decisions, and action items
 - **project.md** — Project overview with goals, milestones, and tasks
 
-## Getting Started
+## Fresh Install / Disaster Recovery
 
-### 1. Set Up Your Obsidian Vault
+If you're setting this up on a new machine or recovering from scratch, follow these steps in order.
 
-Create the following folder structure in your vault (or customize to fit your life):
+### Prerequisites
+
+- **macOS** (required for Apple Reminders and Calendar integration via AppleScript)
+- **Obsidian** — [download here](https://obsidian.md)
+- **Claude Desktop App** with Cowork mode enabled, OR **Claude Code** CLI
+- **Slack** (optional) — for morning briefings, evening check-ins, and Slack capture
+- **Gmail / Google Calendar MCP connectors** (optional) — for email inbox processing and supplemental calendar
+
+### Step 1: Clone this repo
+
+```bash
+git clone https://github.com/amcheste/ea-skills.git ~/ea-skills
+```
+
+### Step 2: Set up your Obsidian vault
+
+Create a new vault (or use an existing one) and set up the folder structure:
 
 ```
 Your Vault/
@@ -46,42 +62,91 @@ Your Vault/
 └── Home.md
 ```
 
-Copy the templates from the `templates/` folder into your vault's `Templates/` folder.
+Copy the templates from `~/ea-skills/templates/` into your vault's `Templates/` folder.
 
-### 2. Install a Skill
+### Step 3: Install the skills
 
-To use a skill in Claude Cowork or Claude Code, copy the skill folder into your skills directory. The exact location depends on your setup, but the skill just needs to be accessible to Claude as a mounted folder.
+**For Claude Code:**
+Copy the skills into your Claude Code skills directory:
+```bash
+cp -r ~/ea-skills/skills/* ~/.claude/skills/
+```
 
-### 3. Customize the Log Categories
+**For Cowork mode:**
+When starting a Cowork session, mount your Obsidian vault folder AND the `~/ea-skills/skills/` folder so Claude can access both.
 
-The daily note template comes with generic "Work" and "Personal" log sections. Customize these to match your life areas. For example:
+### Step 4: Customize for your setup
 
-- Academic, Side Projects, Health
+Edit the following files to match your personal setup:
+
+**Reminders lists** — in `skills/task-manager/SKILL.md`, update the list routing section to match your Apple Reminders list names. The defaults are:
+- **To Do** — general tasks
+- **NCSU** — academic work (change to your school/org)
+- **CAM** — work tasks (change to your company)
+- **House** — home projects
+- **Family** — family tasks
+- **Groceries** — shopping
+
+**Daily note log categories** — in `skills/obsidian-daily-note/SKILL.md` and `templates/daily-note.md`, update the Log section categories. The defaults are Academic, Side Projects, Personal. Change to whatever areas of your life you want to track.
+
+### Step 5: Set up Apple integrations
+
+**Apple Calendar:** Add all your calendar accounts (work, personal, iCloud) in System Settings → Internet Accounts. The skills read from the macOS Calendar app directly, so any account you add there is automatically available.
+
+**Apple Reminders:** Create the Reminders lists that match your routing config from Step 4. The skills will also auto-create lists if they don't exist.
+
+### Step 6: Connect MCP tools
+
+In the Claude Desktop App, connect these MCP tools as needed:
+
+- **Control_your_Mac osascript** — required for Apple Reminders and Calendar integration
+- **Slack** — required for morning briefings, evening check-ins, and Slack capture
+- **Gmail** — required for inbox processing skill
+- **Google Calendar** — optional supplement to Apple Calendar
+
+### Step 7: Set up scheduled tasks
+
+Scheduled tasks run automatically on your Mac. Set these up in Cowork's Scheduled section (sidebar → Scheduled → create new):
+
+| Task | Schedule | What it does |
+|------|----------|--------------|
+| Morning Briefing | 8:00 AM daily | Creates daily note, syncs to Apple Reminders, Slack DMs you a summary |
+| Inbox Processing | 8:30 AM weekdays | Scans Gmail + Slack for action items, adds to daily note |
+| Slack-to-Obsidian Capture | 9 AM, 12 PM, 3 PM, 6 PM daily | Sweeps your Slack self-DMs into daily note Inbox |
+| Evening Reflection | 8:00 PM daily | Slack DMs you reflection questions based on your day |
+| Weekly Review Kickoff | 4:00 PM Fridays | Creates weekly review note from daily notes, Slack DMs summary |
+
+**Important:** After creating each scheduled task, click "Run now" once to pre-approve the tool permissions. Otherwise the first automatic run will pause waiting for approval.
+
+### Step 8: Test it
+
+Say "Good morning, let's plan my day" in Cowork or Claude Code. You should get a daily note created in your vault with calendar events and carry-forward items, tasks synced to Apple Reminders, and (if Slack is connected) a morning briefing DM.
+
+## Day-to-Day Usage
+
+Once set up, here's how to use the system:
+
+- **Morning:** The 8 AM briefing creates your daily note and Slack DMs you. Open Obsidian, review priorities, start working.
+- **During the day:** Quick capture thoughts by telling Claude "remind me to..." or "note to self..." — it files to your vault + Reminders. Or DM yourself on Slack and the sweep task picks it up.
+- **Prioritization:** Ask Claude "what should I focus on?" or "help me prioritize" — it pulls your tasks, calendar, and deadlines and gives you a realistic plan.
+- **Evening:** The 8 PM check-in Slack DMs you reflection questions. Fill in your daily note's evening section.
+- **Friday:** The 4 PM weekly review creates a summary note and Slack DMs you the highlights.
+
+## Customization
+
+### Log Categories
+The daily note template comes with Academic, Side Projects, and Personal. Customize these to match your life:
 - Client Work, Internal, Learning
 - Day Job, Creative, Family
+- Work, Health, Relationships
 
-Edit both the template and the skill's SKILL.md to match your categories.
+Edit both the template and the daily note skill's SKILL.md.
 
-### 4. Optional: Apple Reminders Integration
+### Reminders Lists
+Update the routing in `skills/task-manager/SKILL.md` to match your Apple Reminders list names.
 
-The task manager skill uses the `Control_your_Mac osascript` MCP tool to read and write Apple Reminders via inline AppleScript. The default list routing is:
-
-- **To Do** — general tasks
-- **NCSU** — academic work (customize to your school)
-- **CAM** — work/business tasks (customize to your company)
-- **House** — home projects
-- **Family** — family-related tasks
-- **Groceries** — shopping lists
-
-Customize the list names in the task-manager SKILL.md to match your own Reminders lists.
-
-### 5. Optional: Apple Calendar Integration
-
-The skills read Apple Calendar via the `Control_your_Mac osascript` MCP tool, which covers ALL accounts you've added to the Calendar app (work Exchange/Outlook, iCloud, Google, etc.). This is the preferred calendar source since it aggregates everything in one place. No extra setup needed — just add your accounts in System Settings → Internet Accounts.
-
-### 6. Optional: Google Calendar Integration
-
-The skills can also pull events from Google Calendar MCP as a supplement. This is useful if you don't have the `Control_your_Mac osascript` MCP available (e.g., running in a sandboxed environment). Set up the Google Calendar MCP connector in Claude to enable it.
+### Scheduled Task Timing
+Adjust the cron schedules to match your routine. Night owl? Move the morning briefing to 10 AM. Early bird? Set it to 6 AM.
 
 ## Philosophy
 
