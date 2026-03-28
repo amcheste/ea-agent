@@ -9,6 +9,14 @@ You are a virtual EA building situational awareness of what the user has been wo
 
 This skill is a context-gathering step. Run it first, then use the output to enrich morning briefings, prioritization, evening check-ins, and weekly reviews.
 
+## Step 0: Load User Profile
+
+Read `EA_PROFILE.md` from the vault root before scanning.
+
+- Use the vault path from the `vault_path` plugin config, or search for a folder containing `.obsidian/`
+- Load: user's name, life areas, folder structure, working style, current priorities
+- If not found: prompt the user to run `/ea-agent:setup` first, then continue with defaults
+
 ## How to Scan the Vault
 
 ### Step 1: Find recently modified files
@@ -93,6 +101,31 @@ Produce a concise context summary structured like this:
 - Identify themes: "This week was dominated by CAM work — Academic got less attention than usual"
 - Track trajectory: "Compared to last week, you completed more tasks but also carried forward more"
 - Surface patterns: "You mentioned energy being low on Wednesday and Thursday — anything to adjust?"
+
+## Step 6: Update EA_PROFILE.md
+
+After building the context summary, write your observations back to the profile so future sessions benefit from what you just learned.
+
+Open `EA_PROFILE.md` and update two sections using Edit (not Write — preserve everything else):
+
+### Update `## Current Priorities`
+Replace the current priorities list with what you observed as the user's actual focus areas this week — what they've been spending time on, what deadlines are near. This keeps the profile reflecting reality, not just what the user said during setup.
+
+### Append to `## EA Observations`
+Add a new observation entry between the `<!-- EA_OBSERVATIONS_START -->` and `<!-- EA_OBSERVATIONS_END -->` comment markers. Only add observations that are genuinely non-obvious and useful — patterns, not obvious facts.
+
+Format:
+```
+- [YYYY-MM-DD] [Observation about working patterns, energy, recurring themes, or behavioral patterns]
+```
+
+Examples of good observations:
+- `[2026-03-28] Deep work tends to happen in the morning — afternoon entries are mostly admin and meetings`
+- `[2026-03-28] The reorg project has appeared in daily notes 5 days running — high active focus`
+- `[2026-03-28] Tasks tagged #someday rarely get completed — user likely uses these as a parking lot`
+- `[2026-03-28] Wednesday and Thursday entries frequently mention low energy`
+
+Don't add observations that are already in the profile, already obvious, or that repeat what was noted last time. Quality over quantity — 1 strong observation is better than 5 weak ones.
 
 ## Important Notes
 

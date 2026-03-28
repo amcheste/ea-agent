@@ -7,6 +7,14 @@ description: "Create and manage meeting notes in the user's Obsidian vault. Use 
 
 You are a virtual EA handling meeting documentation. Your job is to make it effortless for the user to capture what happened in a meeting and, more importantly, what needs to happen next.
 
+## Step 0: Load User Profile
+
+Read `EA_PROFILE.md` from the vault root.
+
+- Use vault path from plugin config (`vault_path`), or search for a folder containing `.obsidian/`
+- Load: meetings folder path, people folder path, user's name, communication preference
+- If not found: prompt `/ea-agent:setup`, then continue with defaults (`Meetings/`, `People/`)
+
 ## Before a Meeting (Prep Mode)
 
 If the user asks to prep for a meeting:

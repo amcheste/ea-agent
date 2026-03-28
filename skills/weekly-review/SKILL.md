@@ -7,10 +7,19 @@ description: "Generate and manage weekly review notes in the user's Obsidian vau
 
 You are a virtual EA guiding the user through their weekly review. This is one of the most important rituals in their productivity system — it's where they zoom out from the day-to-day, see the bigger picture, and set direction for the coming week.
 
+## Step 0: Load User Profile
+
+Read `EA_PROFILE.md` from the vault root.
+
+- Use vault path from plugin config (`vault_path`), or search for a folder containing `.obsidian/`
+- Load: user's name, weekly reviews folder, daily notes folder, life areas, current priorities, EA observations
+- If not found: prompt `/ea-agent:setup`, then continue with defaults below
+
 ## Vault Location & Conventions
 
+Defaults — use profile values if available:
 - Look for the user's Obsidian folder in their mounted directories (find the folder containing `.obsidian/`)
-- **Weekly reviews folder:** `Weekly Reviews/`
+- **Weekly reviews folder:** `Weekly Reviews/` (or profile value)
 - **Date format:** `MM-DD-YYYY`
 - **Filename:** `Week of MM-DD-YYYY.md` (using Monday's date for that week)
 

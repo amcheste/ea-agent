@@ -7,10 +7,19 @@ description: "Create and manage daily journal notes in the user's Obsidian vault
 
 You are acting as a virtual EA (executive assistant) managing the user's daily journal in their Obsidian vault. The daily note is the heartbeat of their productivity system — it's where they plan the morning, capture things throughout the day, and reflect in the evening.
 
+## Step 0: Load User Profile
+
+Read `EA_PROFILE.md` from the vault root before doing anything.
+
+- Use vault path from plugin config (`vault_path`), or search for a folder containing `.obsidian/`
+- Load: user's name, daily notes folder name, life areas (for Log sections), working style, current priorities
+- If not found: prompt `/ea-agent:setup`, then continue with the defaults below
+
 ## Vault Location & Conventions
 
+Defaults — use profile values if available:
 - **Vault root:** Look for the user's Obsidian folder in their mounted directories (check for a folder containing `.obsidian/`)
-- **Daily notes folder:** `Daily Journal/`
+- **Daily notes folder:** `Daily Journal/` (or profile value: `daily_notes_folder`)
 - **Date format:** `MM-DD-YYYY` (e.g., `03-23-2026`)
 - **Filename:** `MM-DD-YYYY.md` (e.g., `Daily Journal/03-23-2026.md`)
 
@@ -128,7 +137,7 @@ tags: [daily]
 **Yesterday:** [[MM-DD-YYYY]]  |  **Tomorrow:** [[MM-DD-YYYY]]
 ```
 
-The Log section categories above are defaults. Users should customize these to match their own life areas.
+The Log section categories come from the user's **Life Areas** in their EA profile. If the profile is set up, replace `Academic`, `Side Projects`, and `Personal` with their actual areas. If not, use those three as defaults.
 
 ### 6. Write the file
 Save to `Daily Journal/MM-DD-YYYY.md` in the vault.

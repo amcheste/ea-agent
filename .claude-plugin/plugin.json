@@ -1,6 +1,6 @@
 {
   "name": "ea-agent",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A virtual executive assistant for Claude Code — daily notes, task management, inbox triage, meeting notes, weekly reviews, and quick capture, all wired into Obsidian and Apple Reminders.",
   "author": {
     "name": "amcheste",
@@ -9,5 +9,11 @@
   "repository": "https://github.com/amcheste/ea-agent",
   "license": "MIT",
   "keywords": ["executive-assistant", "obsidian", "productivity", "tasks", "reminders", "inbox", "daily-note"],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "userConfig": {
+    "vault_path": {
+      "description": "Full path to your Obsidian vault (e.g., /Users/yourname/Documents/Obsidian/MyVault). Run /ea-agent:setup after installing to complete your profile.",
+      "sensitive": false
+    }
+  }
 }

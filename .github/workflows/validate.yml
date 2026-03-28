@@ -1,0 +1,170 @@
+name: Validate Plugin
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-structure:
+    name: Validate Plugin Structure
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate plugin manifest
+        run: |
+          python3 - <<'EOF'
+          import json, sys
+
+          with open('.claude-plugin/plugin.json') as f:
+              plugin = json.load(f)
+
+          errors = []
+          if 'name' not in plugin:
+              errors.append("plugin.json missing required field: name")
+          if 'version' not in plugin:
+              errors.append("plugin.json missing required field: version")
+          if 'skills' not in plugin:
+              errors.append("plugin.json missing skills path")
+
+          if errors:
+              for e in errors:
+                  print(f"ERROR: {e}")
+              sys.exit(1)
+
+          print(f"✓ Plugin manifest valid: {plugin['name']} v{plugin['version']}")
+          EOF
+
+      - name: Validate skill structure and frontmatter
+        run: |
+          python3 - <<'EOF'
+          import os, sys, re
+
+          REQUIRED_FRONTMATTER = ['name', 'description']
+          skills_dir = 'skills'
+          errors = []
+          checked = []
+
+          for skill_name in sorted(os.listdir(skills_dir)):
+              skill_path = os.path.join(skills_dir, skill_name)
+              if not os.path.isdir(skill_path):
+                  continue
+
+              skill_file = os.path.join(skill_path, 'SKILL.md')
+              if not os.path.exists(skill_file):
+                  errors.append(f"{skill_name}: missing SKILL.md")
+                  continue
+
+              with open(skill_file) as f:
+                  content = f.read()
+
+              if not content.startswith('---'):
+                  errors.append(f"{skill_name}: SKILL.md has no frontmatter (must start with ---)")
+                  continue
+
+              # Extract frontmatter block
+              parts = content.split('---', 2)
+              if len(parts) < 3:
+                  errors.append(f"{skill_name}: SKILL.md frontmatter not closed")
+                  continue
+
+              frontmatter = parts[1]
+
+              for field in REQUIRED_FRONTMATTER:
+                  if not re.search(rf'^{field}\s*:', frontmatter, re.MULTILINE):
+                      errors.append(f"{skill_name}: SKILL.md frontmatter missing '{field}'")
+
+              # Check description is non-empty
+              desc_match = re.search(r'^description\s*:\s*(.+)', frontmatter, re.MULTILINE)
+              if desc_match and len(desc_match.group(1).strip()) < 10:
+                  errors.append(f"{skill_name}: SKILL.md description is too short")
+
+              checked.append(skill_name)
+
+          if errors:
+              for e in errors:
+                  print(f"ERROR: {e}")
+              sys.exit(1)
+
+          print(f"✓ All {len(checked)} skills validated: {', '.join(checked)}")
+          EOF
+
+      - name: Check for required files
+        run: |
+          missing=()
+          [ -f "README.md" ] || missing+=("README.md")
+          [ -f "LICENSE" ] || missing+=("LICENSE")
+          [ -f ".claude-plugin/plugin.json" ] || missing+=(".claude-plugin/plugin.json")
+
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo "ERROR: Missing required files: ${missing[*]}"
+            exit 1
+          fi
+          echo "✓ All required files present"
+
+      - name: Validate skills reference profile in Step 0
+        run: |
+          python3 - <<'EOF'
+          import os, sys
+
+          # Every skill except setup should reference EA_PROFILE.md
+          EXEMPT = {'setup'}
+          skills_dir = 'skills'
+          errors = []
+
+          for skill_name in sorted(os.listdir(skills_dir)):
+              if skill_name in EXEMPT:
+                  continue
+              skill_path = os.path.join(skills_dir, skill_name)
+              if not os.path.isdir(skill_path):
+                  continue
+              skill_file = os.path.join(skill_path, 'SKILL.md')
+              if not os.path.exists(skill_file):
+                  continue
+              with open(skill_file) as f:
+                  content = f.read()
+              if 'EA_PROFILE.md' not in content:
+                  errors.append(f"{skill_name}: SKILL.md does not reference EA_PROFILE.md (all skills should load the user profile)")
+
+          if errors:
+              for e in errors:
+                  print(f"ERROR: {e}")
+              sys.exit(1)
+
+          print(f"✓ All non-setup skills reference EA_PROFILE.md")
+          EOF
+
+  validate-version:
+    name: Validate Version Consistency
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check setup skill matches plugin version
+        run: |
+          python3 - <<'EOF'
+          import json, re, sys
+
+          with open('.claude-plugin/plugin.json') as f:
+              plugin = json.load(f)
+
+          plugin_version = plugin.get('version', '')
+          # Extract major.minor (e.g., "1.1.0" → "1.1", "1.0.0" → "1.0")
+          major_minor = '.'.join(plugin_version.split('.')[:2])
+
+          with open('skills/setup/SKILL.md') as f:
+              setup_content = f.read()
+
+          # Setup skill should declare the current profile version it expects
+          # Profile version tracks schema changes, not plugin patch releases
+          # Just verify the setup skill file exists and has version references
+          if 'profile_version' not in setup_content and 'Profile Version' not in setup_content:
+              print("ERROR: skills/setup/SKILL.md does not reference a profile version")
+              sys.exit(1)
+
+          print(f"✓ Plugin version: {plugin_version}, setup skill references profile versioning")
+          EOF

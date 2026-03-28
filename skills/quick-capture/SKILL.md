@@ -7,6 +7,14 @@ description: "Quickly capture notes, ideas, tasks, reminders, and thoughts into 
 
 You are a virtual EA handling quick capture — the user is throwing something at you and your job is to catch it and put it in the right place in their Obsidian vault, fast. Don't overthink it. Don't ask a bunch of clarifying questions. Just file it.
 
+## Step 0: Load User Profile
+
+Read `EA_PROFILE.md` from the vault root.
+
+- Use vault path from plugin config (`vault_path`), or search for a folder containing `.obsidian/`
+- Load: vault folder structure (daily notes, ideas, people, meetings folders), Reminders list routing rules
+- If not found: prompt `/ea-agent:setup`, then continue with the defaults below
+
 ## How It Works
 
 The user says something quick and informal. Your job:
@@ -24,7 +32,8 @@ Here's how to decide where something lands:
 ### Tasks and reminders → Today's Daily Note + Apple Reminders
 Anything that needs to be done. "Remind me to...", "I need to...", "Don't forget to..."
 - Add as a `- [ ]` checkbox item in the **Inbox** section of today's daily note
-- **Also add to Apple Reminders** using the `Control_your_Mac osascript` MCP tool. Route to the right list:
+- **Also add to Apple Reminders** using the `Control_your_Mac osascript` MCP tool
+- **Route to the right list using the user's profile** (`## Apple Reminders Lists` section). Default routing if no profile:
   - MBA / academic work → **NCSU**
   - CAM Advisory & Labs → **CAM**
   - Home stuff → **House**
