@@ -1,0 +1,213 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write   # Required to create GitHub Releases
+
+jobs:
+  # ── Job 1: Structural validation ─────────────────────────────────────────
+  validate:
+    name: Validate Plugin Structure
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # Full history needed for version comparison
+
+      - name: Validate plugin manifest
+        run: |
+          python3 - <<'EOF'
+          import json, sys
+
+          with open('.claude-plugin/plugin.json') as f:
+              plugin = json.load(f)
+
+          errors = []
+          if 'name' not in plugin:
+              errors.append("plugin.json missing required field: name")
+          if 'version' not in plugin:
+              errors.append("plugin.json missing required field: version")
+
+          # Verify tag matches plugin version
+          import os
+          tag = os.environ.get('GITHUB_REF_NAME', '')
+          if tag.startswith('v'):
+              tag_version = tag.lstrip('v')
+              if plugin['version'] != tag_version:
+                  errors.append(
+                      f"Tag {tag} does not match plugin.json version {plugin['version']}. "
+                      "Update plugin.json before tagging."
+                  )
+
+          if errors:
+              for e in errors:
+                  print(f"ERROR: {e}")
+              sys.exit(1)
+
+          print(f"✓ Plugin manifest valid: {plugin['name']} v{plugin['version']}")
+          EOF
+        env:
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+
+      - name: Validate skill structure and frontmatter
+        run: |
+          python3 - <<'EOF'
+          import os, sys, re
+
+          REQUIRED_FRONTMATTER = ['name', 'description']
+          skills_dir = 'skills'
+          errors = []
+          checked = []
+
+          for skill_name in sorted(os.listdir(skills_dir)):
+              skill_path = os.path.join(skills_dir, skill_name)
+              if not os.path.isdir(skill_path):
+                  continue
+              skill_file = os.path.join(skill_path, 'SKILL.md')
+              if not os.path.exists(skill_file):
+                  errors.append(f"{skill_name}: missing SKILL.md")
+                  continue
+              with open(skill_file) as f:
+                  content = f.read()
+              if not content.startswith('---'):
+                  errors.append(f"{skill_name}: missing frontmatter")
+                  continue
+              parts = content.split('---', 2)
+              if len(parts) < 3:
+                  errors.append(f"{skill_name}: frontmatter not closed")
+                  continue
+              frontmatter = parts[1]
+              for field in REQUIRED_FRONTMATTER:
+                  if not re.search(rf'^{field}\s*:', frontmatter, re.MULTILINE):
+                      errors.append(f"{skill_name}: frontmatter missing '{field}'")
+              if skill_name != 'setup' and 'EA_PROFILE.md' not in content:
+                  errors.append(f"{skill_name}: does not reference EA_PROFILE.md")
+              checked.append(skill_name)
+
+          if errors:
+              for e in errors:
+                  print(f"ERROR: {e}")
+              sys.exit(1)
+
+          print(f"✓ All {len(checked)} skills valid")
+          EOF
+
+  # ── Job 2: Evals gate ────────────────────────────────────────────────────
+  evals:
+    name: Run Evals
+    runs-on: ubuntu-latest
+    needs: validate
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r evals/requirements.txt
+
+      - name: Run routing evals
+        run: python evals/eval_runner.py --routing-only --pass-threshold 85
+
+      - name: Run behavioral evals
+        run: python evals/eval_runner.py --behavioral-only --pass-threshold 75
+
+  # ── Job 3: Create GitHub Release ─────────────────────────────────────────
+  release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    needs: [validate, evals]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Read plugin version
+        id: plugin
+        run: |
+          VERSION=$(python3 -c "import json; print(json.load(open('.claude-plugin/plugin.json'))['version'])")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Check if profile_version changed since last release
+        id: profile
+        run: |
+          # Get the previous release tag
+          PREV_TAG=$(git tag --sort=-version:refname | grep '^v' | sed -n '2p')
+
+          if [ -z "$PREV_TAG" ]; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "old_version=none" >> $GITHUB_OUTPUT
+            echo "new_version=first release" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          OLD=$(git show "$PREV_TAG:skills/setup/SKILL.md" 2>/dev/null \
+            | grep -m1 'profile_version' | grep -oP '[\d.]+' || echo "unknown")
+          NEW=$(grep -m1 'profile_version' skills/setup/SKILL.md \
+            | grep -oP '[\d.]+' || echo "unknown")
+
+          echo "old_version=$OLD" >> $GITHUB_OUTPUT
+          echo "new_version=$NEW" >> $GITHUB_OUTPUT
+
+          if [ "$OLD" != "$NEW" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build release notes
+        id: notes
+        run: |
+          PROFILE_CHANGED="${{ steps.profile.outputs.changed }}"
+          OLD_PROFILE="${{ steps.profile.outputs.old_version }}"
+          NEW_PROFILE="${{ steps.profile.outputs.new_version }}"
+
+          # Build upgrade notice if profile changed
+          if [ "$PROFILE_CHANGED" = "true" ]; then
+            UPGRADE_NOTICE="## ⚠️ Profile upgrade required
+
+          This release updates the EA profile schema (v${OLD_PROFILE} → v${NEW_PROFILE}).
+          Run the setup skill after updating to unlock new features:
+
+          \`\`\`
+          /ea-agent:setup
+          \`\`\`
+
+          Your existing profile data is preserved — setup will only ask about new fields.
+
+          ---
+
+          "
+          else
+            UPGRADE_NOTICE="No profile changes — no action required after updating.
+
+          ---
+
+          "
+          fi
+
+          # Write to file so multiline works cleanly
+          echo "$UPGRADE_NOTICE" > /tmp/release_prefix.md
+          echo "prefix_file=/tmp/release_prefix.md" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PREFIX=$(cat ${{ steps.notes.outputs.prefix_file }})
+
+          gh release create "${{ github.ref_name }}" \
+            --title "EA Agent ${{ github.ref_name }}" \
+            --notes "$PREFIX" \
+            --generate-notes \
+            --verify-tag
