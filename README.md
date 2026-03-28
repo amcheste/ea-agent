@@ -142,6 +142,49 @@ Your Obsidian vault is the single source of truth for your work and life. Claude
 
 A good EA is proactive, remembers context across days, and gets better the longer they work with you. That's what this plugin is designed to enable.
 
+## CI/CD
+
+Every push to `main` and every pull request runs the validation workflow in `.github/workflows/validate.yml`:
+
+| Job | Runs on | What it checks |
+|-----|---------|----------------|
+| Validate Plugin Structure | push + PR | Plugin manifest fields, SKILL.md frontmatter, required files, all skills reference EA_PROFILE.md |
+| Validate Version Consistency | push + PR | Setup skill references a profile version |
+| Run Evals | PR only | Skill routing accuracy (85% threshold) and behavioral quality (75% threshold) using the Claude API |
+
+### Setting up the API key secret
+
+The evals job requires an Anthropic API key to call Claude. Add it as a GitHub Actions secret:
+
+1. Go to your repo → **Settings** → **Secrets and variables** → **Actions**
+2. Click **New repository secret**
+3. Name: `ANTHROPIC_API_KEY`
+4. Value: your Anthropic API key from [console.anthropic.com](https://console.anthropic.com)
+
+Without this secret the evals job will fail. The structural validation jobs run without it and will still pass.
+
+### Running evals locally
+
+```bash
+cd ea-agent
+pip install -r evals/requirements.txt
+export ANTHROPIC_API_KEY=your-key-here
+
+# Run everything
+python evals/eval_runner.py
+
+# Routing only (fast, ~$0.02)
+python evals/eval_runner.py --routing-only
+
+# Behavioral only
+python evals/eval_runner.py --behavioral-only
+
+# Custom pass threshold
+python evals/eval_runner.py --pass-threshold 90
+```
+
+Each full run costs roughly **$0.08** (routing on Haiku, behavioral agent on Haiku, judge on Sonnet).
+
 ## Contributing
 
 Contributions welcome. A few things to keep in mind:
