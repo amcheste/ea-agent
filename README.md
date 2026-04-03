@@ -254,7 +254,7 @@ A good EA is proactive, remembers context across days, and gets better the longe
 
 ## Contributing
 
-This is Alan Chester's personal EA configuration. It is open for others to **fork and adapt** for their own use — that is the primary use case for anyone other than the owner.
+This project is open for others to **fork and adapt** for their own use — that is the primary use case for anyone other than the maintainer.
 
 A few things to keep in mind if contributing:
 

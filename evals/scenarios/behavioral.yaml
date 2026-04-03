@@ -118,7 +118,7 @@
     EA_PROFILE.md exists with a Reminders list called 'Work' for professional tasks.
   criteria:
     - "Routes the task to the 'Work' list from the profile"
-    - "Does not mention NCSU, CAM, or any other hardcoded organization names"
+    - "Does not use hardcoded organization or list names not present in the profile"
     - "Confirms the capture clearly"
 
 # ── Weekly review quality ─────────────────────────────────────────────────────

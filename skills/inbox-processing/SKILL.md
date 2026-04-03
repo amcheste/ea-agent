@@ -76,7 +76,7 @@ If today's daily note doesn't exist, create it first.
 - **Filter aggressively.** The user doesn't need to hear about every promotional email or Slack bot notification. Focus on messages from real people that need real responses.
 - **Group by person.** If the same person emailed and Slacked about the same thing, consolidate it into one item.
 - **Suggest responses.** If a quick reply would clear something off the plate, offer to draft it.
-- **Flag patterns.** "You have 3 unread emails from your MBA program — might be worth a batch reply."
+- **Flag patterns.** "You have 3 unread emails from the same sender — might be worth a batch reply."
 - **Don't overwhelm.** If there are 50 unread emails, don't list all 50. Give the top 5-10 that actually matter and summarize the rest.
 
 ## Scheduling Note

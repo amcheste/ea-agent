@@ -84,7 +84,7 @@ Produce a concise context summary structured like this:
 
 ### Morning Briefing
 - Reference recent momentum: "You've been on a roll with the PM workshop doc — day 3 of steady progress"
-- Flag stuck items: "The MBA deadline check has been on your list for 3 days now"
+- Flag stuck items: "The Q2 planning doc has been on your list for 3 days now"
 - Match priorities to energy: if recent reflections mention being tired, suggest lighter work first
 - Acknowledge wins from the last few days, not just yesterday
 
@@ -98,7 +98,7 @@ Produce a concise context summary structured like this:
 - Celebrate streaks: "You've logged something in your Academic section every day this week"
 
 ### Weekly Review
-- Identify themes: "This week was dominated by CAM work — Academic got less attention than usual"
+- Identify themes: "This week was dominated by Work tasks — Personal projects got less attention than usual"
 - Track trajectory: "Compared to last week, you completed more tasks but also carried forward more"
 - Surface patterns: "You mentioned energy being low on Wednesday and Thursday — anything to adjust?"
 

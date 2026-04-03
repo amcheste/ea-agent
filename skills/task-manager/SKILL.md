@@ -59,9 +59,9 @@ When a task should be done today, always set the due date to today. This makes i
 
 ```applescript
 tell application "Reminders"
-    tell list "NCSU"
-        set newReminder to make new reminder with properties {name:"MBA assignment draft", priority:1, due date:date "2026-03-25"}
-        set body of newReminder to "Chapter 4 analysis"
+    tell list "Work"
+        set newReminder to make new reminder with properties {name:"Project proposal draft", priority:1, due date:date "2026-03-25"}
+        set body of newReminder to "Section 3 analysis"
     end tell
 end tell
 ```
@@ -96,8 +96,8 @@ end tell
 
 ```applescript
 tell application "Reminders"
-    tell list "NCSU"
-        set matchingReminders to (every reminder whose name is "MBA assignment draft" and completed is false)
+    tell list "Work"
+        set matchingReminders to (every reminder whose name is "Project proposal draft" and completed is false)
         if (count of matchingReminders) > 0 then
             set completed of item 1 of matchingReminders to true
         end if
@@ -180,8 +180,8 @@ Keep it conversational and actionable. Don't dump a spreadsheet on them. Somethi
 "You've got about 4 hours of focus time today between your meetings. Here's what I'd prioritize:
 
 **Must do today:**
-1. MBA assignment draft (due Friday, ~2 hours) — this is the big one
-2. Reply to Professor Smith's email (15 min, blocking your research proposal)
+1. Project proposal draft (due Friday, ~2 hours) — this is the big one
+2. Reply to your client's email (15 min, blocking their deliverable)
 
 **If you have time:**
 3. Review side project PRs (30 min)
@@ -190,7 +190,7 @@ Keep it conversational and actionable. Don't dump a spreadsheet on them. Somethi
 - Grocery shopping (no deadline)
 - Explore Obsidian plugins (nice-to-have)
 
-Want me to block time on your calendar for the MBA draft?"
+Want me to block time on your calendar for the proposal draft?"
 
 ### Proactive EA behaviors
 
@@ -210,7 +210,7 @@ When creating or updating daily notes:
 When the user checks off a task in conversation:
 1. Mark it complete in Apple Reminders via osascript
 2. Update the daily note if the task appears there
-3. Brief confirmation: "Done — marked 'MBA assignment draft' complete in Reminders and your daily note."
+3. Brief confirmation: "Done — marked 'Project proposal draft' complete in Reminders and your daily note."
 
 ## Adding Tasks
 
@@ -222,4 +222,4 @@ When the user wants to add a task, figure out:
 
 Then add to both Apple Reminders AND today's daily note Inbox.
 
-Confirm in one line: "Added 'Submit MBA paper' to NCSU (due Friday, high priority)."
+Confirm in one line: "Added 'Submit project proposal' to Work (due Friday, high priority)."

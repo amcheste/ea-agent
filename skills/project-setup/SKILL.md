@@ -30,7 +30,7 @@ Don't over-interview. If the user gives you a quick description, that's often en
 ### 2. Create the project note
 
 Save to the appropriate area folder based on the **Life Areas** in the user's EA profile. If no profile, use these defaults:
-- An MBA project → `Academic/MBA/Project Name.md`
+- A work project → `Work/Project Name.md`
 - A side project → `Side Projects/Project Name.md`
 - A personal project → use your best judgment on folder
 
@@ -41,7 +41,7 @@ Use this template:
 date: MM-DD-YYYY
 type: project
 status: active
-area: [Academic/MBA, Side Projects, Personal, etc.]
+area: [Work, Side Projects, Personal, etc.]
 tags: [project, area-tag]
 ---
 
