@@ -13,7 +13,7 @@ Read `EA_PROFILE.md` from the vault root.
 
 - Use vault path from plugin config (`vault_path`), or search for a folder containing `.obsidian/`
 - Load: Gmail accounts to check, Slack workspaces to scan, user's name (for personalizing the summary), communication preference
-- If not found: prompt `/ea-agent:setup`, then proceed scanning all available accounts
+- If not found: tell the user to run `/ea-agent:setup` to configure their accounts, then stop — do not fabricate inbox contents or proceed without account access
 
 ## The Process
 

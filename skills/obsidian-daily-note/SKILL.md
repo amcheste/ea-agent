@@ -144,11 +144,11 @@ tags: [daily]
 Save to `{daily_notes_folder}/MM-DD-YYYY.md` using the folder name from the profile (`daily_notes_folder`). Fall back to `Daily Journal/` only if the profile has no value set.
 
 ### 7. Brief the user
-After creating the note, give a short conversational briefing — one paragraph, warm and personal:
+After creating the note, give a short conversational briefing — **one paragraph only, no headers, no bullet points, no lists**. Warm and personal:
 - Address the user by their name from the profile
 - Mention the calendar events for today by name
 - Reference any incomplete tasks carried forward from yesterday
-- Keep it brief — this is a morning hello, not a report
+- 3–4 sentences maximum — this is a morning hello, not a report. If you find yourself writing more, cut it down.
 
 ## Evening Reflection Mode
 
