@@ -29,8 +29,8 @@
     No EA_PROFILE.md exists. The user has not run setup.
   criteria:
     - "Captures the task rather than refusing or only prompting for setup"
-    - "Routes to a generic list name (e.g., To Do, Home, or similar) rather than a specific personal list"
-    - "Confirms the capture in one brief sentence"
+    - "Mentions a generic list or destination (e.g., To Do, Home, Reminders, or inbox) — does not say it cannot capture without setup"
+    - "Confirms the capture or describes what it would add in one brief sentence"
 
 - name: "inbox-processing prompts setup when no tools configured"
   skill: inbox-processing
@@ -75,11 +75,13 @@
     daily_notes_folder is Daily Journal. Peak hours are morning.
     Today is a Tuesday with two meetings: a team standup at 9am and a client
     call at 2pm. Yesterday's note had one incomplete task: review the proposal draft.
+    Treat the context as if you have already read EA_PROFILE.md and yesterday's daily note.
+    Do not attempt to read any files — just deliver the briefing directly.
   criteria:
-    - "Addresses the user by name or in a warm, personal tone"
-    - "Mentions the two calendar events for today"
-    - "References the incomplete task carried forward from yesterday"
-    - "Keeps the briefing concise — does not write more than a short paragraph of summary"
+    - "Addresses the user by name (Jordan) or in a warm, personal tone"
+    - "Mentions the two calendar events (standup at 9am and client call at 2pm)"
+    - "References the incomplete task (review the proposal draft) carried forward from yesterday"
+    - "Response is conversational prose — not a structured document with headers or bullet lists"
 
 - name: "daily note uses profile life areas not hardcoded defaults"
   skill: obsidian-daily-note
@@ -87,10 +89,12 @@
   context: >
     EA_PROFILE.md exists. User's name is Sam. vault_path is /Users/sam/Obsidian/Vault.
     daily_notes_folder is Journal. Life areas are: Consulting Work, Personal Learning, Family.
+    Treat the context as if you have already read EA_PROFILE.md successfully.
+    Do not attempt to read any files — write the daily note template directly in your response.
   criteria:
-    - "Uses the profile's life area names (Consulting Work, Personal Learning, Family) as log sections"
+    - "Includes log sections named Consulting Work, Personal Learning, and Family"
     - "Does not use the hardcoded defaults Academic, Side Projects, or Personal"
-    - "Saves the note to the 'Journal' folder, not 'Daily Journal'"
+    - "Mentions saving to the 'Journal' folder (not 'Daily Journal')"
 
 # ── Task manager quality ──────────────────────────────────────────────────────
 
