@@ -152,9 +152,9 @@ jobs:
           fi
 
           OLD=$(git show "$PREV_TAG:skills/setup/SKILL.md" 2>/dev/null \
-            | grep -m1 'profile_version' | grep -oP '[\d.]+' || echo "unknown")
+            | grep -m1 'profile_version' | grep -oP '\d+\.\d+' || echo "unknown")
           NEW=$(grep -m1 'profile_version' skills/setup/SKILL.md \
-            | grep -oP '[\d.]+' || echo "unknown")
+            | grep -oP '\d+\.\d+' || echo "unknown")
 
           echo "old_version=$OLD" >> $GITHUB_OUTPUT
           echo "new_version=$NEW" >> $GITHUB_OUTPUT

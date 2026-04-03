@@ -89,8 +89,6 @@
   context: >
     EA_PROFILE.md exists. User's name is Sam. vault_path is /Users/sam/Obsidian/Vault.
     daily_notes_folder is Journal. Life areas are: Consulting Work, Personal Learning, Family.
-    Treat the context as if you have already read EA_PROFILE.md successfully.
-    Do not attempt to read any files — write the daily note template directly in your response.
   criteria:
     - "Includes log sections named Consulting Work, Personal Learning, and Family"
     - "Does not use the hardcoded defaults Academic, Side Projects, or Personal"
