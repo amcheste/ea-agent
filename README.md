@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="assets/logo.png" alt="EA Agent mascot" width="200" />
+
 # EA Agent
 
 **A Claude plugin that turns AI into a personalized virtual executive assistant — wired into your Obsidian vault, task manager, calendar, and inbox.**
