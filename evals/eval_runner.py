@@ -198,6 +198,11 @@ def run_behavioral_evals(
 
         system_prompt = (
             f"You are an EA agent. Follow the skill instructions below.\n\n"
+            f"IMPORTANT: You have no filesystem or tool access in this evaluation. "
+            f"The Context block below is the complete source of truth — treat it as if "
+            f"you have already successfully read EA_PROFILE.md and any relevant files. "
+            f"Do not attempt to find, read, or write any files. Proceed directly from "
+            f"the context provided.\n\n"
             f"Context: {context}\n\n"
             f"{skill_content}"
         )
