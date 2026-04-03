@@ -1,0 +1,53 @@
+name-template: 'EA Agent v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+
+categories:
+  - title: '🚀 New Skills'
+    labels:
+      - 'feat'
+      - 'feature'
+  - title: '🐛 Bug Fixes'
+    labels:
+      - 'fix'
+      - 'bug'
+  - title: '🧠 Eval Improvements'
+    labels:
+      - 'evals'
+  - title: '📖 Documentation'
+    labels:
+      - 'docs'
+      - 'documentation'
+  - title: '🔧 Maintenance'
+    labels:
+      - 'chore'
+      - 'refactor'
+      - 'ci'
+  - title: '📦 Dependency Updates'
+    labels:
+      - 'dependencies'
+
+change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+
+version-resolver:
+  major:
+    labels:
+      - 'breaking'
+  minor:
+    labels:
+      - 'feat'
+      - 'feature'
+  patch:
+    labels:
+      - 'fix'
+      - 'bug'
+      - 'chore'
+      - 'docs'
+      - 'dependencies'
+  default: patch
+
+template: |
+  ## What's Changed
+
+  $CHANGES
+
+  **Full Changelog**: https://github.com/amcheste/ea-agent/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION

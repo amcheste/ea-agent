@@ -13,7 +13,8 @@ Read `EA_PROFILE.md` from the vault root before doing anything.
 
 - Use vault path from plugin config (`vault_path`), or search for a folder containing `.obsidian/`
 - Load: user's name, daily notes folder name, life areas (for Log sections), working style, current priorities
-- If not found: prompt `/ea-agent:setup`, then continue with the defaults below
+- If not found: continue with the defaults below and mention that `/ea-agent:setup` will personalise the experience
+- **Do NOT ask the user to confirm vault path or whether their profile exists** — attempt to locate it automatically. Only ask if you genuinely cannot find it after checking configured vault_path and common locations.
 
 ## Vault Location & Conventions
 
@@ -106,13 +107,13 @@ tags: [daily]
 
 ## Log
 
-### Academic
+### [First life area from profile]
 -
 
-### Side Projects
+### [Second life area from profile]
 -
 
-### Personal
+### [Third life area from profile]
 -
 
 ---
@@ -137,13 +138,17 @@ tags: [daily]
 **Yesterday:** [[MM-DD-YYYY]]  |  **Tomorrow:** [[MM-DD-YYYY]]
 ```
 
-The Log section categories come from the user's **Life Areas** in their EA profile. If the profile is set up, replace `Academic`, `Side Projects`, and `Personal` with their actual areas. If not, use those three as defaults.
+**Always replace the Log section headers with the life area names from `## Life Areas` in EA_PROFILE.md.** Never use `Academic`, `Side Projects`, or `Personal` if the profile has different values — those are placeholders only.
 
 ### 6. Write the file
-Save to `Daily Journal/MM-DD-YYYY.md` in the vault.
+Save to `{daily_notes_folder}/MM-DD-YYYY.md` using the folder name from the profile (`daily_notes_folder`). Fall back to `Daily Journal/` only if the profile has no value set.
 
 ### 7. Brief the user
-After creating the note, give the user a quick conversational summary of their day ahead — mention how many calendar events they have, what carried forward from yesterday, and anything that looks important. Keep it natural, like an EA would brief you in the morning.
+After creating the note, give a short conversational briefing — one paragraph, warm and personal:
+- Address the user by their name from the profile
+- Mention the calendar events for today by name
+- Reference any incomplete tasks carried forward from yesterday
+- Keep it brief — this is a morning hello, not a report
 
 ## Evening Reflection Mode
 

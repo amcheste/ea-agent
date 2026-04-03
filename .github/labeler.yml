@@ -1,0 +1,28 @@
+# Auto-label PRs based on conventional commit prefix in the PR title
+
+feat:
+  - head-branch: ['^feat/', '^feature/']
+
+fix:
+  - head-branch: ['^fix/']
+
+docs:
+  - head-branch: ['^docs/']
+  - changed-files:
+      - any-glob-to-any-file: ['**/*.md']
+
+chore:
+  - head-branch: ['^chore/']
+
+ci:
+  - head-branch: ['^ci/']
+  - changed-files:
+      - any-glob-to-any-file: ['.github/**']
+
+evals:
+  - head-branch: ['^eval/', '^evals/']
+  - changed-files:
+      - any-glob-to-any-file: ['evals/**']
+
+dependencies:
+  - head-branch: ['^dependabot/']

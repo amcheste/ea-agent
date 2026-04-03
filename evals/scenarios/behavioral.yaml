@@ -71,7 +71,8 @@
   skill: obsidian-daily-note
   user_message: "Good morning, let's start the day"
   context: >
-    EA_PROFILE.md exists. User's name is Jordan. Peak hours are morning.
+    EA_PROFILE.md exists. User's name is Jordan. vault_path is /Users/jordan/Obsidian/Vault.
+    daily_notes_folder is Daily Journal. Peak hours are morning.
     Today is a Tuesday with two meetings: a team standup at 9am and a client
     call at 2pm. Yesterday's note had one incomplete task: review the proposal draft.
   criteria:
@@ -84,8 +85,8 @@
   skill: obsidian-daily-note
   user_message: "Create my daily note"
   context: >
-    EA_PROFILE.md exists. Life areas are: Consulting Work, Personal Learning,
-    Family. Daily notes folder is called 'Journal'. User's name is Sam.
+    EA_PROFILE.md exists. User's name is Sam. vault_path is /Users/sam/Obsidian/Vault.
+    daily_notes_folder is Journal. Life areas are: Consulting Work, Personal Learning, Family.
   criteria:
     - "Uses the profile's life area names (Consulting Work, Personal Learning, Family) as log sections"
     - "Does not use the hardcoded defaults Academic, Side Projects, or Personal"

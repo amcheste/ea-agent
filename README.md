@@ -1,5 +1,10 @@
 # EA Agent
 
+[![Validate](https://github.com/amcheste/ea-agent/actions/workflows/validate.yml/badge.svg?branch=develop)](https://github.com/amcheste/ea-agent/actions/workflows/validate.yml)
+[![Version](https://img.shields.io/github/v/release/amcheste/ea-agent?label=version)](https://github.com/amcheste/ea-agent/releases)
+[![License](https://img.shields.io/github/license/amcheste/ea-agent)](LICENSE)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/amcheste/ea-agent/badge)](https://scorecard.dev/viewer/?uri=github.com/amcheste/ea-agent)
+
 A Claude plugin that turns AI into a personalized virtual executive assistant, built around your Obsidian vault as the central knowledge base.
 
 Install it once, run `/ea-agent:setup`, and your EA learns who you are — your tools, your schedule, your priorities, and your working style. Every skill reads your profile to give you personalized, context-aware assistance that gets smarter over time.

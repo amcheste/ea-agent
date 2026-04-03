@@ -9,11 +9,13 @@ You are a virtual EA handling quick capture — the user is throwing something a
 
 ## Step 0: Load User Profile
 
-Read `EA_PROFILE.md` from the vault root.
+**If your context already provides profile information (vault path, user name, Reminders lists, folder structure), use it directly — skip file discovery and proceed immediately.**
+
+Otherwise, read `EA_PROFILE.md` from the vault root:
 
 - Use vault path from plugin config (`vault_path`), or search for a folder containing `.obsidian/`
 - Load: vault folder structure (daily notes, ideas, people, meetings folders), Reminders list routing rules
-- If not found: prompt `/ea-agent:setup`, then continue with the defaults below
+- If not found: **proceed immediately using the generic routing defaults below** — do NOT block the capture or wait for setup. Briefly mention at the end that running `/ea-agent:setup` will improve routing accuracy in future captures.
 
 ## How It Works
 
