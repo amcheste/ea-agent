@@ -7,7 +7,8 @@ Project-specific conventions for working on this repo with Claude Code.
 - `main` — stable, released code only. Never commit directly.
 - `develop` — integration branch. All feature PRs target this.
 - Feature branches: `feat/<name>`, `fix/<name>`, `ci/<name>`, `docs/<name>`, `evals/<name>`
-- Releases: `develop` → PR → `main` → tag `v*.*.*`
+- Releases: `develop` → CLI merge → `main` → tag `v*.*.*`
+- **Never open a GitHub PR to merge develop→main.** Use `git merge --no-ff origin/develop` on the CLI. GitHub's merge button squash-merges by default, dropping ancestry and causing conflicts on the next release.
 
 ## Commit style
 
