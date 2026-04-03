@@ -9,7 +9,6 @@
 [![Validate](https://github.com/amcheste/ea-agent/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/amcheste/ea-agent/actions/workflows/validate.yml)
 [![Version](https://img.shields.io/github/v/release/amcheste/ea-agent?label=version)](https://github.com/amcheste/ea-agent/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/amcheste/ea-agent/badge)](https://scorecard.dev/viewer/?uri=github.com/amcheste/ea-agent)
 
 </div>
 
@@ -176,7 +175,6 @@ The setup skill checks your profile version and only asks about new fields — i
 | **Validate** | Every PR + push to `main`/`develop` | Plugin structure, skill frontmatter, version consistency, eval quality gate |
 | **Release** | `v*.*.*` tags | Validate → evals → publish GitHub Release |
 | **SAST** | Every PR + weekly | Semgrep secret scanning |
-| **OpenSSF Scorecard** | Push to `main` + weekly | Security posture scoring |
 | **Release Drafter** | Push to `develop` | Auto-drafts release notes from PR titles |
 | **Monthly Dep Release** | 1st of each month | Opens a patch release PR if Dependabot has merged updates |
 | **Stale** | Daily | Closes inactive issues and PRs after 60 + 7 days |
