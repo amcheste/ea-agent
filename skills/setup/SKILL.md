@@ -16,15 +16,16 @@ The current expected profile version is **1.0**.
 
 ## Step 1: Find the Vault
 
-First, locate the user's Obsidian vault:
+**If `vault_path` is already configured** (from a previous setup or plugin config), skip vault discovery entirely and go straight to Step 2 — do NOT ask the user about their vault location.
 
-1. Check if a `vault_path` was configured at plugin install time (available as the configured `vault_path` setting)
-2. If not, search common locations:
+If vault_path is not configured, locate it:
+
+1. Search common locations:
    - `~/Documents/` — look for folders containing `.obsidian/`
    - `~/` — same check
    - `/Volumes/` — for external drives
-3. If multiple vaults are found, ask the user which one to use
-4. If none found, ask the user to provide the full path
+2. If multiple vaults are found, ask the user which one to use
+3. If none found, ask the user to provide the full path
 
 ## Step 2: Check for Existing Profile
 
