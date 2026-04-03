@@ -153,8 +153,25 @@ jobs:
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          fetch-depth: 0
+
+      - name: Check if skills or evals changed
+        id: changes
+        run: |
+          git diff --name-only origin/${{ github.base_ref }}...HEAD \
+            | grep -qE '^(skills|evals)/' \
+            && echo "relevant=true" >> "$GITHUB_OUTPUT" \
+            || echo "relevant=false" >> "$GITHUB_OUTPUT"
+
+      - name: Skip evals (no skill or eval changes)
+        if: steps.changes.outputs.relevant == 'false'
+        run: |
+          echo "No changes to skills/ or evals/ — skipping token-consuming evals."
+          echo "To force evals, touch any file under skills/ or evals/ in your PR."
 
       - name: Check API key is available
+        if: steps.changes.outputs.relevant == 'true'
         run: |
           if [[ -z "${ANTHROPIC_API_KEY}" ]]; then
             echo "⚠ ANTHROPIC_API_KEY not set — skipping evals."
@@ -164,20 +181,24 @@ jobs:
           echo "ANTHROPIC_API_KEY present ✓"
 
       - name: Set up Python
+        if: steps.changes.outputs.relevant == 'true'
         uses: actions/setup-python@28f2168f4d98ee0445e3c6321f6e6616c83dd5ec # v5
         with:
           python-version: "3.11"
 
       - name: Install eval dependencies
+        if: steps.changes.outputs.relevant == 'true'
         run: pip install -r evals/requirements.txt
 
       - name: Run routing evals
+        if: steps.changes.outputs.relevant == 'true'
         run: |
           python evals/eval_runner.py \
             --routing-only \
             --pass-threshold 85
 
       - name: Run behavioral evals
+        if: steps.changes.outputs.relevant == 'true'
         run: |
           python evals/eval_runner.py \
             --behavioral-only \
