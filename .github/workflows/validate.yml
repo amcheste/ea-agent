@@ -145,7 +145,7 @@ jobs:
     name: Run Evals
     runs-on: ubuntu-latest
     # Only run on PRs — saves API costs on direct pushes to main
-    if: github.event_name == 'pull_request' && secrets.ANTHROPIC_API_KEY != ''
+    if: github.event_name == 'pull_request'
     # Structural validation must pass before spending API tokens
     needs: [validate-structure, validate-version]
     env:
