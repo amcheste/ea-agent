@@ -1,6 +1,6 @@
 {
   "name": "ea-agent",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "A virtual executive assistant for Claude Code \u2014 daily notes, task management, inbox triage, meeting notes, weekly reviews, and quick capture, all wired into Obsidian and Apple Reminders.",
   "author": {
     "name": "amcheste",
