@@ -15,7 +15,7 @@ Otherwise, read `EA_PROFILE.md` from the vault root:
 
 - Use vault path from plugin config (`vault_path`), or search for a folder containing `.obsidian/`
 - Load: vault folder structure (daily notes, ideas, people, meetings folders), Reminders list routing rules
-- If not found: **proceed immediately using the generic routing defaults below** — do NOT block the capture or wait for setup. Briefly mention at the end that running `/ea-agent:setup` will improve routing accuracy in future captures.
+- If not found: **proceed immediately using the generic routing defaults below** — do NOT block the capture or ask for a vault path. When no vault is configured, skip writing to Obsidian entirely — just add to Apple Reminders using the generic list defaults and confirm verbally in one sentence. Briefly mention at the end that running `/ea-agent:setup` will enable full vault capture in future.
 
 ## How It Works
 

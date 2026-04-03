@@ -1,14 +1,22 @@
 {
   "name": "ea-agent",
-  "version": "1.1.0",
-  "description": "A virtual executive assistant for Claude Code — daily notes, task management, inbox triage, meeting notes, weekly reviews, and quick capture, all wired into Obsidian and Apple Reminders.",
+  "version": "1.2.0",
+  "description": "A virtual executive assistant for Claude Code \u2014 daily notes, task management, inbox triage, meeting notes, weekly reviews, and quick capture, all wired into Obsidian and Apple Reminders.",
   "author": {
     "name": "amcheste",
     "url": "https://github.com/amcheste"
   },
   "repository": "https://github.com/amcheste/ea-agent",
   "license": "MIT",
-  "keywords": ["executive-assistant", "obsidian", "productivity", "tasks", "reminders", "inbox", "daily-note"],
+  "keywords": [
+    "executive-assistant",
+    "obsidian",
+    "productivity",
+    "tasks",
+    "reminders",
+    "inbox",
+    "daily-note"
+  ],
   "skills": "./skills/",
   "userConfig": {
     "vault_path": {
