@@ -7,8 +7,8 @@
 **A Claude plugin that turns AI into a personalized virtual executive assistant — wired into your Obsidian vault, task manager, calendar, and inbox.**
 
 [![Validate](https://github.com/amcheste/ea-agent/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/amcheste/ea-agent/actions/workflows/validate.yml)
-[![Version](https://img.shields.io/github/v/release/amcheste/ea-agent?label=version)](https://github.com/amcheste/ea-agent/releases)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Version](https://img.shields.io/github/v/release/amcheste/ea-agent?label=version&color=0B0B0C)](https://github.com/amcheste/ea-agent/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-1F4D3A.svg)](LICENSE)
 
 </div>
 
