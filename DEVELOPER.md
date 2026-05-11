@@ -4,7 +4,7 @@ Everything you need to build, test, and extend the EA Agent plugin.
 
 ## How the plugin works
 
-EA Agent is a [Claude Code plugin](https://code.claude.com/docs/en/plugins.md) — a collection of skills packaged for easy installation and distribution. There is no server, no compiled code, and no runtime to manage. The "agent" is a set of markdown instruction files (`SKILL.md`) that tell Claude how to behave in specific situations.
+EA Agent is a [Claude Code plugin](https://code.claude.com/docs/en/plugins.md). A collection of skills packaged for easy installation and distribution. There is no server, no compiled code, and no runtime to manage. The "agent" is a set of markdown instruction files (`SKILL.md`) that tell Claude how to behave in specific situations.
 
 When a user installs the plugin and invokes a skill, Claude reads the skill's instructions and executes them using whatever MCP tools and file access it has available in the user's session.
 
@@ -99,7 +99,7 @@ Read `EA_PROFILE.md` from the vault root.
 - ...
 ```
 
-**Step 0 is mandatory** for every skill except `setup`. It makes the skill generic and personalized at the same time — any user can install it and it adapts to their setup.
+**Step 0 is mandatory** for every skill except `setup`. It makes the skill generic and personalized at the same time. Any user can install it and it adapts to their setup.
 
 ### 4. Add routing eval scenarios
 
@@ -179,7 +179,7 @@ last_updated: YYYY-MM-DD
 - ...
 
 ## Apple Reminders Lists
-- "List Name" — routing description
+- "List Name": routing description
 - ...
 
 ## Communication Tools
@@ -217,7 +217,7 @@ Skills load the profile at the start of every interaction (Step 0). They use pro
 | weekly-review | weekly reviews folder, life areas |
 | meeting-notes | meetings folder, people folder |
 | project-setup | life areas + folder paths |
-| vault-context | all — reads and writes back observations |
+| vault-context | all (reads and writes back observations) |
 
 ### Updating the profile schema
 
@@ -238,7 +238,7 @@ When adding new profile fields:
 
 ### Routing evals (`evals/scenarios/routing.yaml`)
 
-Test that a user phrase triggers the right skill. The eval runner loads all skill descriptions and asks Claude to classify the phrase — this tests whether descriptions are clear and distinct enough.
+Test that a user phrase triggers the right skill. The eval runner loads all skill descriptions and asks Claude to classify the phrase. This tests whether descriptions are clear and distinct enough.
 
 Good routing scenarios:
 - Use natural, conversational language (how a real user would phrase it)
@@ -250,9 +250,9 @@ Good routing scenarios:
 Test response quality using a judge LLM. The runner sends the scenario to Claude with the skill content as a system prompt, then asks Sonnet to evaluate the response against your criteria.
 
 Good criteria:
-- **Specific and observable** — can be verified by reading the response text
-- **One thing each** — don't combine multiple checks into one criterion
-- **Failure-informative** — if Claude fails this criterion, it tells you something meaningful
+- **Specific and observable**. Can be verified by reading the response text
+- **One thing each**. Don't combine multiple checks into one criterion
+- **Failure-informative**. If Claude fails this criterion, it tells you something meaningful
 
 Bad criteria (too vague):
 - ❌ "The response is helpful"
