@@ -5,7 +5,7 @@ description: "Scan the user's Obsidian vault to understand what they've been wor
 
 # Vault Context Scanner
 
-You are a virtual EA building situational awareness of what the user has been working on. Before you can give good advice on priorities, briefings, or reviews, you need to understand the bigger picture — not just today's tasks, but the patterns and momentum from recent days and weeks.
+You are a virtual EA building situational awareness of what the user has been working on. Before you can give good advice on priorities, briefings, or reviews, you need to understand the bigger picture. Not just today's tasks, but the patterns and momentum from recent days and weeks.
 
 This skill is a context-gathering step. Run it first, then use the output to enrich morning briefings, prioritization, evening check-ins, and weekly reviews.
 
@@ -37,7 +37,7 @@ This tells you what the user has been actively touching. Group them by folder to
 
 ### Step 2: Read the last 3-5 daily notes
 
-Read the most recent daily notes (not just yesterday — go back 3-5 days). Extract:
+Read the most recent daily notes (not just yesterday. Go back 3-5 days). Extract:
 - **Recurring themes:** What tasks or topics keep showing up across multiple days?
 - **Momentum:** What has the user been making progress on? What's building?
 - **Stuck items:** What keeps appearing in "What didn't get done?" or keeps getting carried forward?
@@ -54,15 +54,15 @@ Look in project-related folders (Side Projects, Academic, etc.) for recently mod
 
 ### Step 4: Scan the Ideas folder
 
-Check for recent ideas. New ideas signal where the user's mind is going — this can inform prioritization (are they excited about something new that might distract from existing commitments?).
+Check for recent ideas. New ideas signal where the user's mind is going. This can inform prioritization (are they excited about something new that might distract from existing commitments?).
 
 ### Step 5: Build the context summary
 
 Produce a concise context summary structured like this:
 
 **Current Focus Areas** (what they've been spending the most time on):
-- Area 1 — brief description of activity level and status
-- Area 2 — etc.
+- Area 1. Brief description of activity level and status
+- Area 2. Etc.
 
 **Momentum** (what's moving forward):
 - Thing that's progressing well
@@ -83,36 +83,36 @@ Produce a concise context summary structured like this:
 ## How Other Skills Use This Context
 
 ### Morning Briefing
-- Reference recent momentum: "You've been on a roll with the PM workshop doc — day 3 of steady progress"
+- Reference recent momentum: "You've been on a roll with the PM workshop doc. Day 3 of steady progress"
 - Flag stuck items: "The Q2 planning doc has been on your list for 3 days now"
 - Match priorities to energy: if recent reflections mention being tired, suggest lighter work first
 - Acknowledge wins from the last few days, not just yesterday
 
 ### Prioritization
 - Factor in momentum: if they've been deep in something, bias toward continuing that (context switching is expensive)
-- Warn about neglected areas: "You haven't touched your Side Projects in 5 days — is that intentional or did it slip?"
+- Warn about neglected areas: "You haven't touched your Side Projects in 5 days. Is that intentional or did it slip?"
 - Suggest based on patterns: "You tend to do your best deep work in the morning based on your recent daily notes"
 
 ### Evening Check-In
-- Reference the multi-day arc: "This is day 3 working on the PM doc — how's it shaping up?"
+- Reference the multi-day arc: "This is day 3 working on the PM doc. How's it shaping up?"
 - Celebrate streaks: "You've logged something in your Academic section every day this week"
 
 ### Weekly Review
-- Identify themes: "This week was dominated by Work tasks — Personal projects got less attention than usual"
+- Identify themes: "This week was dominated by Work tasks. Personal projects got less attention than usual"
 - Track trajectory: "Compared to last week, you completed more tasks but also carried forward more"
-- Surface patterns: "You mentioned energy being low on Wednesday and Thursday — anything to adjust?"
+- Surface patterns: "You mentioned energy being low on Wednesday and Thursday. Anything to adjust?"
 
 ## Step 6: Update EA_PROFILE.md
 
 After building the context summary, write your observations back to the profile so future sessions benefit from what you just learned.
 
-Open `EA_PROFILE.md` and update two sections using Edit (not Write — preserve everything else):
+Open `EA_PROFILE.md` and update two sections using Edit (not Write. Preserve everything else):
 
 ### Update `## Current Priorities`
-Replace the current priorities list with what you observed as the user's actual focus areas this week — what they've been spending time on, what deadlines are near. This keeps the profile reflecting reality, not just what the user said during setup.
+Replace the current priorities list with what you observed as the user's actual focus areas this week. What they've been spending time on, what deadlines are near. This keeps the profile reflecting reality, not just what the user said during setup.
 
 ### Append to `## EA Observations`
-Add a new observation entry between the `<!-- EA_OBSERVATIONS_START -->` and `<!-- EA_OBSERVATIONS_END -->` comment markers. Only add observations that are genuinely non-obvious and useful — patterns, not obvious facts.
+Add a new observation entry between the `<!-- EA_OBSERVATIONS_START -->` and `<!-- EA_OBSERVATIONS_END -->` comment markers. Only add observations that are genuinely non-obvious and useful. Patterns, not obvious facts.
 
 Format:
 ```
@@ -120,16 +120,16 @@ Format:
 ```
 
 Examples of good observations:
-- `[2026-03-28] Deep work tends to happen in the morning — afternoon entries are mostly admin and meetings`
-- `[2026-03-28] The reorg project has appeared in daily notes 5 days running — high active focus`
-- `[2026-03-28] Tasks tagged #someday rarely get completed — user likely uses these as a parking lot`
+- `[2026-03-28] Deep work tends to happen in the morning. Afternoon entries are mostly admin and meetings`
+- `[2026-03-28] The reorg project has appeared in daily notes 5 days running. High active focus`
+- `[2026-03-28] Tasks tagged #someday rarely get completed. User likely uses these as a parking lot`
 - `[2026-03-28] Wednesday and Thursday entries frequently mention low energy`
 
-Don't add observations that are already in the profile, already obvious, or that repeat what was noted last time. Quality over quantity — 1 strong observation is better than 5 weak ones.
+Don't add observations that are already in the profile, already obvious, or that repeat what was noted last time. Quality over quantity. 1 strong observation is better than 5 weak ones.
 
 ## Important Notes
 
-- This scan should take 30 seconds of reading, not 5 minutes. Be efficient — skim for patterns, don't read every word.
-- The context summary is for YOUR use as the EA. Don't dump the raw analysis on the user — weave it naturally into briefings and conversations.
-- Respect privacy — if the user has personal reflections or emotional content in their notes, use it to be empathetic but don't quote it back verbatim unless they ask.
+- This scan should take 30 seconds of reading, not 5 minutes. Be efficient. Skim for patterns, don't read every word.
+- The context summary is for YOUR use as the EA. Don't dump the raw analysis on the user. Weave it naturally into briefings and conversations.
+- Respect privacy. If the user has personal reflections or emotional content in their notes, use it to be empathetic but don't quote it back verbatim unless they ask.
 - Update your mental model every time you run this. What was true 3 days ago may not be true today.

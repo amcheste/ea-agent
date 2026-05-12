@@ -1,6 +1,6 @@
 # Testing Guide
 
-This document describes every layer of testing for ea-agent — from automated CI to manual end-to-end runs with a real Obsidian vault.
+This document describes every layer of testing for ea-agent. From automated CI to manual end-to-end runs with a real Obsidian vault.
 
 ---
 
@@ -8,7 +8,7 @@ This document describes every layer of testing for ea-agent — from automated C
 
 Every pull request runs three jobs automatically.
 
-### Job 1 — Structural Validation (Ubuntu, ~10 seconds)
+### Job 1. Structural Validation (Ubuntu, ~10 seconds)
 
 | Check | What it catches |
 |-------|----------------|
@@ -18,13 +18,13 @@ Every pull request runs three jobs automatically.
 | Required files | `README.md`, `LICENSE`, `.claude-plugin/plugin.json` |
 | Profile references | Every skill (except `setup`) must reference `EA_PROFILE.md` |
 
-### Job 2 — Version Consistency (Ubuntu, ~5 seconds)
+### Job 2. Version Consistency (Ubuntu, ~5 seconds)
 
 | Check | What it catches |
 |-------|----------------|
 | Profile version reference | `skills/setup/SKILL.md` must reference a `profile_version` |
 
-### Job 3 — Evals (Ubuntu, ~90 seconds, PR only, skipped if no skill/eval files changed)
+### Job 3. Evals (Ubuntu, ~90 seconds, PR only, skipped if no skill/eval files changed)
 
 | Check | Threshold | What it catches |
 |-------|-----------|----------------|
@@ -93,13 +93,13 @@ Behavioral scenarios go in `evals/scenarios/behavioral.yaml`:
 ```
 
 **Context tips:**
-- Always include `vault_path` and relevant profile fields — the eval runner has no filesystem access and treats the context block as ground truth
+- Always include `vault_path` and relevant profile fields. The eval runner has no filesystem access and treats the context block as ground truth
 - Criteria should be observable from the response text, not dependent on tool execution
-- Keep criteria specific — "mentions the standup at 9am" beats "mentions calendar events"
+- Keep criteria specific. "mentions the standup at 9am" beats "mentions calendar events"
 
 ---
 
-## Manual Testing — Real Claude Code Session
+## Manual Testing. Real Claude Code Session
 
 The best way to validate the full end-to-end experience.
 
@@ -121,10 +121,10 @@ The best way to validate the full end-to-end experience.
    Walk through the questionnaire. Check that `EA_PROFILE.md` is written to your vault root with the correct values.
 
 3. Connect MCP tools in Claude's settings:
-   - **Control your Mac** — for Apple Reminders and Calendar
-   - **Gmail** — for inbox processing
-   - **Slack** — for inbox processing and messaging
-   - **Google Calendar** — for supplemental calendar data
+   - **Control your Mac**. For Apple Reminders and Calendar
+   - **Gmail**. For inbox processing
+   - **Slack**. For inbox processing and messaging
+   - **Google Calendar**. For supplemental calendar data
 
 ### Skill-by-skill test checklist
 
@@ -140,7 +140,7 @@ The best way to validate the full end-to-end experience.
 - [ ] Log sections use your life area names (not hardcoded defaults)
 - [ ] Schedule section pulls from Apple Calendar and/or Google Calendar
 - [ ] Carry-forward section includes unchecked tasks from yesterday's note
-- [ ] Briefing is conversational — one paragraph, addresses you by name
+- [ ] Briefing is conversational. One paragraph, addresses you by name
 - [ ] Links to yesterday's and tomorrow's notes at the bottom
 
 #### Quick Capture (`/ea-agent:quick-capture`)
@@ -148,8 +148,8 @@ The best way to validate the full end-to-end experience.
 - [ ] Same task also appears in Apple Reminders in the correct list
 - [ ] Idea captures go to `Ideas/` folder (or today's inbox with `#idea` for small ones)
 - [ ] Person notes go to `People/` (creates or appends)
-- [ ] Confirms in one sentence — does not ask clarifying questions for clear requests
-- [ ] Works without a profile — falls back to generic Reminders list, skips vault write
+- [ ] Confirms in one sentence. Does not ask clarifying questions for clear requests
+- [ ] Works without a profile. Falls back to generic Reminders list, skips vault write
 
 #### Task Manager (`/ea-agent:task-manager`)
 - [ ] "What should I focus on?" applies Eisenhower matrix to open tasks
@@ -162,7 +162,7 @@ The best way to validate the full end-to-end experience.
 - [ ] Scans Slack for mentions and DMs
 - [ ] Surfaces action items, not noise
 - [ ] Adds action items to today's daily note Inbox
-- [ ] Handles no accounts gracefully — suggests `/ea-agent:setup`
+- [ ] Handles no accounts gracefully. Suggests `/ea-agent:setup`
 
 #### Meeting Notes (`/ea-agent:meeting-notes`)
 - [ ] Pre-meeting: generates a brief with context on attendees and agenda
@@ -180,7 +180,7 @@ The best way to validate the full end-to-end experience.
 - [ ] Surfaces wins, open loops, and carry-forward tasks
 - [ ] Pulls next week's calendar events
 - [ ] Saves review note to `Weekly Reviews/`
-- [ ] Conversational tone — not a dry report
+- [ ] Conversational tone. Not a dry report
 
 #### Vault Context (`/ea-agent:vault-context`)
 - [ ] Scans recent daily notes for patterns
@@ -197,7 +197,7 @@ When bumping `profile_version` in the setup skill:
 2. Install the new plugin version
 3. Run `/ea-agent:setup`
 4. Verify it detects the version mismatch
-5. Verify it only asks about new fields — does not overwrite existing data
+5. Verify it only asks about new fields. Does not overwrite existing data
 6. Verify `profile_version` is updated in `EA_PROFILE.md` after completion
 
 ---
@@ -213,7 +213,7 @@ For isolated skill testing without touching your production vault:
 
 2. Set `vault_path` to `/tmp/test-vault` when running setup
 
-3. Test freely — delete `/tmp/test-vault` when done
+3. Test freely. Delete `/tmp/test-vault` when done
 
 This is especially useful when testing the setup skill's questionnaire flow or vault structure creation.
 
@@ -226,4 +226,4 @@ This is especially useful when testing the setup skill's questionnaire flow or v
 | Routing | 85% | ~93% |
 | Behavioral | 75% | ~80–90% |
 
-If evals are flaky (same scenario passes/fails across runs), the likely cause is model non-determinism on edge cases. Check whether the scenario's criteria are ambiguous or whether the context is underspecified — both are more reliable fixes than adjusting the threshold.
+If evals are flaky (same scenario passes/fails across runs), the likely cause is model non-determinism on edge cases. Check whether the scenario's criteria are ambiguous or whether the context is underspecified. Both are more reliable fixes than adjusting the threshold.

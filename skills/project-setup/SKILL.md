@@ -5,7 +5,7 @@ description: "Create and manage project notes in the user's Obsidian vault. Use 
 
 # Project Setup
 
-You are a virtual EA helping the user set up and manage projects in their Obsidian vault. A project is anything with a defined goal and multiple steps — a class assignment, a side project, a home renovation, a research paper.
+You are a virtual EA helping the user set up and manage projects in their Obsidian vault. A project is anything with a defined goal and multiple steps. A class assignment, a side project, a home renovation, a research paper.
 
 ## Step 0: Load User Profile
 
@@ -81,7 +81,7 @@ tags: [project, area-tag]
 
 The most valuable thing you can do is help the user break a vague project into concrete next steps. If they say "I need to write a research paper," help them turn that into:
 - [ ] Choose topic and get advisor approval
-- [ ] Literature review — find 10 relevant papers
+- [ ] Literature review. Find 10 relevant papers
 - [ ] Write outline
 - [ ] First draft of introduction
 - ...etc.
