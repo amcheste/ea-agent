@@ -1,6 +1,8 @@
-<div align="center">
+<p align="center">
+  <img src="assets/banner.svg" alt="EA Agent · daily-note brief showing today's calendar (09:00 team sync, 11:00 1:1 with Taylor, 14:00 deep work block), top 3 priorities (→ finish v1.3 release notes, → reply to inbox, → weekly review prep) in Hunter Green as the δ output, and carry from yesterday" width="100%">
+</p>
 
-<img src="assets/logo.png" alt="EA Agent mascot" width="200" />
+<div align="center">
 
 # EA Agent
 
