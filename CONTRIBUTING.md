@@ -1,14 +1,14 @@
 # Contributing to EA Agent
 
-Thanks for wanting to improve the EA Agent. Contributions are welcome — whether that's a new skill, an improvement to an existing one, new eval scenarios, or a bug fix.
+Thanks for wanting to improve the EA Agent. Contributions are welcome. Whether that's a new skill, an improvement to an existing one, new eval scenarios, or a bug fix.
 
 ## What we're looking for
 
-- **New skills** — workflows that would benefit any user (not personal/org-specific)
-- **Skill improvements** — better instructions, clearer fallbacks, smarter EA behavior
-- **Eval scenarios** — more coverage for edge cases and regression protection
-- **Profile schema additions** — new fields that make skills smarter (requires `profile_version` bump)
-- **Bug fixes** — incorrect behavior, broken fallbacks, hardcoded personal info that slipped in
+- **New skills**. Workflows that would benefit any user (not personal/org-specific)
+- **Skill improvements**. Better instructions, clearer fallbacks, smarter EA behavior
+- **Eval scenarios**. More coverage for edge cases and regression protection
+- **Profile schema additions**. New fields that make skills smarter (requires `profile_version` bump)
+- **Bug fixes**. Incorrect behavior, broken fallbacks, hardcoded personal info that slipped in
 
 ## Getting started
 
@@ -22,7 +22,7 @@ See [DEVELOPER.md](DEVELOPER.md) for the full local development setup.
 
 ## Before you submit
 
-1. **Run the structural validation** — make sure your skill is well-formed:
+1. **Run the structural validation**. Make sure your skill is well-formed:
    ```bash
    python3 -c "
    import os, re, sys
@@ -37,13 +37,13 @@ See [DEVELOPER.md](DEVELOPER.md) for the full local development setup.
    "
    ```
 
-2. **Run evals** — evals must meet the pass threshold before merging:
+2. **Run evals**. Evals must meet the pass threshold before merging:
    ```bash
    export ANTHROPIC_API_KEY=your-key
    python evals/eval_runner.py --pass-threshold 80
    ```
 
-3. **Add eval scenarios** for any new skill or changed behavior — see [DEVELOPER.md](DEVELOPER.md#writing-evals).
+3. **Add eval scenarios** for any new skill or changed behavior. See [DEVELOPER.md](DEVELOPER.md#writing-evals).
 
 ## Skill writing standards
 
@@ -52,14 +52,14 @@ These keep the plugin coherent as it grows.
 ### Every skill must:
 - Start with a `## Step 0: Load User Profile` section that reads `EA_PROFILE.md`
 - Include a graceful fallback if no profile exists (suggest `/ea-agent:setup`, then continue with sensible defaults)
-- Be generic — no hardcoded names, organizations, folder paths, or Reminders list names that belong in a user's profile
+- Be generic. No hardcoded names, organizations, folder paths, or Reminders list names that belong in a user's profile
 - Have a `description:` in frontmatter that clearly describes when to invoke it, including example trigger phrases
 
 ### EA tone guidelines:
-- **Conversational, not robotic** — write skill instructions as you'd brief a human assistant
-- **Proactive** — skills should anticipate what the user needs next, not just answer the literal question
-- **Concise** — briefings and confirmations should be short; don't repeat information back unnecessarily
-- **Warm but direct** — friendly tone without being sycophantic
+- **Conversational, not robotic**. Write skill instructions as you'd brief a human assistant
+- **Proactive**. Skills should anticipate what the user needs next, not just answer the literal question
+- **Concise**. Briefings and confirmations should be short; don't repeat information back unnecessarily
+- **Warm but direct**. Friendly tone without being sycophantic
 
 ### Profile fallback pattern (use this consistently):
 ```markdown
@@ -78,11 +78,11 @@ If your contribution adds new fields to `EA_PROFILE.md`:
 
 1. Update the profile template in `skills/setup/SKILL.md`
 2. Bump `profile_version` in the setup skill (e.g., `1.0` → `1.1`)
-3. Add upgrade handling in the setup skill's Step 4 (Upgrade Mode) — document what's new in that version
+3. Add upgrade handling in the setup skill's Step 4 (Upgrade Mode). Document what's new in that version
 4. Update `DEVELOPER.md` with the new fields
 5. Add behavioral evals that test the new fields are used correctly
 
-See [DEVELOPER.md — Updating the profile schema](DEVELOPER.md#updating-the-profile-schema) for details.
+See [DEVELOPER.md. Updating the profile schema](DEVELOPER.md#updating-the-profile-schema) for details.
 
 ## Pull request process
 
@@ -100,10 +100,10 @@ See [DEVELOPER.md — Updating the profile schema](DEVELOPER.md#updating-the-pro
 [Brief description]
 
 ## Why
-[Motivation — what problem does this solve or what does it improve?]
+[Motivation: what problem does this solve or what does it improve?]
 
 ## Skills affected
-- [ ] skill-name — what changed
+- [ ] skill-name: what changed
 
 ## Evals
 - [ ] Added/updated routing scenarios
@@ -112,7 +112,7 @@ See [DEVELOPER.md — Updating the profile schema](DEVELOPER.md#updating-the-pro
 
 ## Profile changes
 - [ ] No profile schema changes
-- [ ] Profile schema changed — profile_version bumped to X.X
+- [ ] Profile schema changed: profile_version bumped to X.X
 ```
 
 ## What we won't merge
