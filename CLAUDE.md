@@ -1,11 +1,11 @@
-# EA Agent — Claude Code Conventions
+# EA Agent. Claude Code Conventions
 
 Project-specific conventions for working on this repo with Claude Code.
 
 ## Branch model
 
-- `main` — stable, released code only. Never commit directly.
-- `develop` — integration branch. All feature PRs target this.
+- `main`. Stable, released code only. Never commit directly.
+- `develop`. Integration branch. All feature PRs target this.
 - Feature branches: `feat/<name>`, `fix/<name>`, `ci/<name>`, `docs/<name>`, `evals/<name>`
 - Releases: `develop` → CLI merge → `main` → tag `v*.*.*`
 - **Never open a GitHub PR to merge develop→main.** Use `git merge --no-ff origin/develop` on the CLI. GitHub's merge button squash-merges by default, dropping ancestry and causing conflicts on the next release.

@@ -20,7 +20,7 @@ Read `EA_PROFILE.md` from the vault root.
 If the user asks to prep for a meeting:
 
 ### 1. Get meeting context
-- Check Google Calendar (`gcal_list_events`) for the meeting details — title, attendees, time
+- Check Google Calendar (`gcal_list_events`) for the meeting details. Title, attendees, time
 - Search the vault for existing notes related to the meeting topic or attendees
 - Check `People/` for notes on the attendees
 - Look for previous meeting notes with the same people
@@ -79,9 +79,9 @@ tags: [meeting]
 ### 2. Capture from the user
 
 The user might give you notes in different ways:
-- **Stream of consciousness** — they dump everything they remember. Your job is to organize it into the template sections.
-- **Key points only** — they give you the headlines. Fill in what you can, leave the rest structured but empty.
-- **Action items focus** — they mostly care about what needs to happen next. Prioritize the Action Items section.
+- **Stream of consciousness**. They dump everything they remember. Your job is to organize it into the template sections.
+- **Key points only**. They give you the headlines. Fill in what you can, leave the rest structured but empty.
+- **Action items focus**. They mostly care about what needs to happen next. Prioritize the Action Items section.
 
 Adapt to however the user wants to work. Don't force them into a rigid format if they just want to brain-dump.
 
@@ -108,4 +108,4 @@ When the user asks about a previous meeting:
 - **Action items are king.** The most valuable part of any meeting note is clear action items with owners and due dates. Always prioritize capturing these.
 - **Don't over-capture.** The user doesn't need a transcript. They need the decisions, the action items, and enough context to remember what happened.
 - **Use the user's words.** When they brain-dump, keep their phrasing in the notes rather than over-formalizing it. It'll jog their memory better later.
-- **Proactively suggest.** "You mentioned following up with [person] — want me to add that as an action item with a date?"
+- **Proactively suggest.** "You mentioned following up with [person]. Want me to add that as an action item with a date?"
