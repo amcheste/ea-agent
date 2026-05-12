@@ -12,15 +12,15 @@ EA Agent has two independent version numbers. Understanding the difference is im
 | **Profile version** | `skills/setup/SKILL.md` → `profile_version` | The `EA_PROFILE.md` schema | Only when `EA_PROFILE.md` structure changes |
 
 **Plugin version** follows semver (`MAJOR.MINOR.PATCH`):
-- `PATCH` — bug fixes, wording improvements, new eval scenarios, doc updates
-- `MINOR` — new skills, new profile fields, new features (backwards compatible)
-- `MAJOR` — breaking changes to skill behavior, vault structure changes, major rewrites
+- `PATCH`. Bug fixes, wording improvements, new eval scenarios, doc updates
+- `MINOR`. New skills, new profile fields, new features (backwards compatible)
+- `MAJOR`. Breaking changes to skill behavior, vault structure changes, major rewrites
 
 **Profile version** follows a simple `MAJOR.MINOR` scheme (`1.0`, `1.1`, `2.0`):
-- `MINOR` bump — new optional fields added to `EA_PROFILE.md`
-- `MAJOR` bump — existing fields renamed, removed, or restructured
+- `MINOR` bump. New optional fields added to `EA_PROFILE.md`
+- `MAJOR` bump. Existing fields renamed, removed, or restructured
 
-When `profile_version` changes, users must re-run `/ea-agent:setup` to get the benefits. The setup skill handles the upgrade automatically — it detects the old version and only asks about new fields.
+When `profile_version` changes, users must re-run `/ea-agent:setup` to get the benefits. The setup skill handles the upgrade automatically. It detects the old version and only asks about new fields.
 
 ## Pre-release checklist
 
@@ -68,7 +68,7 @@ If evals fail, the release is not created. Fix the failures, push the fixes to `
 
 ## Writing good release notes
 
-GitHub auto-generates release notes from commit messages since the last tag. The output is only as good as the commit messages — which is why commit messages in this repo follow the format:
+GitHub auto-generates release notes from commit messages since the last tag. The output is only as good as the commit messages. Which is why commit messages in this repo follow the format:
 
 ```
 Short imperative summary (50 chars)
@@ -110,11 +110,11 @@ No profile changes — no action required after updating.
 
 ## After the release
 
-1. **Notify users** — if your coworkers or family have the plugin installed, let them know a new version is available. A Slack message or text with the release link and the key changes is enough.
+1. **Notify users**. If your coworkers or family have the plugin installed, let them know a new version is available. A Slack message or text with the release link and the key changes is enough.
 
-2. **Profile upgrade** — if `profile_version` changed, remind them specifically to run `/ea-agent:setup`. Users won't get the new profile fields until they do.
+2. **Profile upgrade**. If `profile_version` changed, remind them specifically to run `/ea-agent:setup`. Users won't get the new profile fields until they do.
 
-3. **Verify the release** — check that the GitHub Release page looks right at `github.com/amcheste/ea-agent/releases`.
+3. **Verify the release**. Check that the GitHub Release page looks right at `github.com/amcheste/ea-agent/releases`.
 
 ## Hotfix releases
 
@@ -126,11 +126,11 @@ git tag v1.1.1
 git push origin v1.1.1
 ```
 
-Same process — no special branch needed at this scale. The CI will validate and release.
+Same process. No special branch needed at this scale. The CI will validate and release.
 
 ## Version history
 
 | Version | Profile version | Date | Summary |
 |---------|----------------|------|---------|
 | v1.1.0 | 1.0 | 2026-03-28 | Add user profile system, setup skill, CI/CD, eval suite |
-| v1.0.0 | — | 2026-03-28 | Initial release: 8 skills, Obsidian + Apple Reminders integration |
+| v1.0.0 | (n/a) | 2026-03-28 | Initial release: 8 skills, Obsidian + Apple Reminders integration |
