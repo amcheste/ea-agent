@@ -11,6 +11,20 @@ Versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [1.4.0] — 2026-05-12
+
+### Added
+- Brand banner under `assets/` (svg + 1200/2400 png) per [`banner-spec.md`](https://github.com/amcheste/alanchester-brand/blob/main/docs/banner-spec.md). Hero: rendered morning-brief daily note with three priority `→` arrows in Hunter Green as the δ — the EA's synthesized "what matters today" output. README mascot replaced by the banner; `assets/logo.png` preserved.
+
+### Changed
+- Brand-aligned README badges (license in Hunter Green `#1F4D3A`, version in Ink `#0B0B0C`).
+- Release Drafter workflow bumped to v7.3.0.
+
+### Dependencies
+- Dependabot bumps: `github/codeql-action` (3.35.1 → 4.35.4), `actions/labeler` (6.0.1 → 6.1.0), `actions/setup-python`, `release-drafter` (7.1.1 → 7.3.0), `anthropic` (≥0.40.0 → ≥0.101.0 in /evals), `pyyaml` (≥6.0 → ≥6.0.3 in /evals).
+
+---
+
 ## [1.3.5]. 2026-04-03
 
 ---
