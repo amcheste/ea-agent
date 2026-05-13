@@ -6,7 +6,7 @@ This document explains how ea-agent is structured, how skills work, and how the 
 
 ## Overview
 
-ea-agent is a Claude Code plugin — a collection of skills that run inside a Claude Code session. When invoked, a skill receives the full context of the user's EA profile and uses Claude's language model plus MCP tools to interact with the user's vault, calendar, task manager, and communication tools.
+ea-agent is a Claude Code plugin. A collection of skills that run inside a Claude Code session. When invoked, a skill receives the full context of the user's EA profile and uses Claude's language model plus MCP tools to interact with the user's vault, calendar, task manager, and communication tools.
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -100,8 +100,8 @@ ea-agent/
 }
 ```
 
-- **`skills`** — path to the skills directory; Claude Code discovers all subdirectories containing `SKILL.md`
-- **`userConfig`** — config keys the user provides at install time; available to all skills at runtime
+- **`skills`**. Path to the skills directory; Claude Code discovers all subdirectories containing `SKILL.md`
+- **`userConfig`**. Config keys the user provides at install time; available to all skills at runtime
 
 ---
 
@@ -122,7 +122,7 @@ description: "When to invoke this skill — used by the router"
 Instruction prose that Claude follows when this skill is invoked.
 ```
 
-The `description` field is critical — it's what the router reads to decide which skill matches a user message. Write it as a complete routing specification: include trigger phrases, use cases, and context cues.
+The `description` field is critical. It's what the router reads to decide which skill matches a user message. Write it as a complete routing specification: include trigger phrases, use cases, and context cues.
 
 ### Skill invocation flow
 
@@ -153,7 +153,7 @@ This pattern ensures skills degrade gracefully when no profile exists and use co
 
 ## EA_PROFILE.md
 
-`EA_PROFILE.md` is written by the `setup` skill and lives in the vault root. It is the EA's persistent memory about the user — plain markdown, user-editable.
+`EA_PROFILE.md` is written by the `setup` skill and lives in the vault root. It is the EA's persistent memory about the user. Plain markdown, user-editable.
 
 ### Schema (v1.0)
 
@@ -207,7 +207,7 @@ google_calendar: [enabled/disabled]
 
 1. Add the field to the setup skill's questionnaire
 2. Bump `profile_version` (e.g. `1.0` → `1.1`)
-3. Bump the plugin's **major** version — this signals to users they need to re-run `/ea-agent:setup`
+3. Bump the plugin's **major** version. This signals to users they need to re-run `/ea-agent:setup`
 
 The setup skill detects the version mismatch on re-run and only asks about new fields, preserving existing data.
 
@@ -219,12 +219,12 @@ Skills access external systems via MCP tools configured in Claude's settings:
 
 | MCP | Tool calls used | Skills that need it |
 |-----|----------------|---------------------|
-| **Control your Mac** | `osascript` — AppleScript execution | quick-capture, task-manager, obsidian-daily-note |
+| **Control your Mac** | `osascript`, AppleScript execution | quick-capture, task-manager, obsidian-daily-note |
 | **Gmail** | `gmail_search_messages`, `gmail_read_message` | inbox-processing |
 | **Slack** | `slack_read_channel`, `slack_send_message` | inbox-processing, meeting-notes |
 | **Google Calendar** | `gcal_list_events` | obsidian-daily-note, weekly-review |
 
-Skills degrade gracefully when a tool is unavailable — they skip that data source rather than failing.
+Skills degrade gracefully when a tool is unavailable. They skip that data source rather than failing.
 
 ---
 
@@ -265,7 +265,7 @@ The eval runner builds a system prompt of:
 You are an EA agent. [no-tools notice] Context: {context} {skill_content}
 ```
 
-The `no-tools notice` tells the model it has no filesystem access and the context block is authoritative — this prevents the model from attempting file discovery in the eval environment.
+The `no-tools notice` tells the model it has no filesystem access and the context block is authoritative. This prevents the model from attempting file discovery in the eval environment.
 
 ---
 
@@ -297,6 +297,6 @@ develop → PR to main → CI → merge
 git tag v*.*.* → release pipeline (validate + evals + GitHub Release)
 ```
 
-Version lives in `.claude-plugin/plugin.json`. Use `./scripts/bump-version.sh` to bump — it updates `plugin.json`, stamps `CHANGELOG.md`, commits, and tags locally.
+Version lives in `.claude-plugin/plugin.json`. Use `./scripts/bump-version.sh` to bump. It updates `plugin.json`, stamps `CHANGELOG.md`, commits, and tags locally.
 
 See [RELEASE.md](RELEASE.md) for the full release checklist.

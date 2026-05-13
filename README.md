@@ -1,10 +1,12 @@
-<div align="center">
+<p align="center">
+  <img src="assets/banner.svg" alt="EA Agent · daily-note brief showing today's calendar (09:00 team sync, 11:00 1:1 with Taylor, 14:00 deep work block), top 3 priorities (→ finish v1.3 release notes, → reply to inbox, → weekly review prep) in Hunter Green as the δ output, and carry from yesterday" width="100%">
+</p>
 
-<img src="assets/logo.png" alt="EA Agent mascot" width="200" />
+<div align="center">
 
 # EA Agent
 
-**A Claude plugin that turns AI into a personalized virtual executive assistant — wired into your Obsidian vault, task manager, calendar, and inbox.**
+**A Claude plugin that turns AI into a personalized virtual executive assistant. Wired into your Obsidian vault, task manager, calendar, and inbox.**
 
 [![Validate](https://github.com/amcheste/ea-agent/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/amcheste/ea-agent/actions/workflows/validate.yml)
 [![Version](https://img.shields.io/github/v/release/amcheste/ea-agent?label=version&color=0B0B0C)](https://github.com/amcheste/ea-agent/releases)
@@ -14,7 +16,7 @@
 
 ---
 
-Install it once, run `/ea-agent:setup`, and your EA learns who you are — your vault structure, your task lists, your working style, your tools. Every skill reads your profile to give you personalized, context-aware assistance that gets smarter the longer you use it.
+Install it once, run `/ea-agent:setup`, and your EA learns who you are. Your vault structure, your task lists, your working style, your tools. Every skill reads your profile to give you personalized, context-aware assistance that gets smarter the longer you use it.
 
 ```
 /plugin install github:amcheste/ea-agent
@@ -30,13 +32,13 @@ Then run `/ea-agent:setup` to complete onboarding (~5 minutes).
 |-------|-------------|
 | [Setup](skills/setup/) | Short questionnaire that writes your EA profile to your vault. Run this first, and again when upgrading. |
 | [Daily Note](skills/obsidian-daily-note/) | Creates your daily journal with morning planning, today's calendar, carry-forward from yesterday, and an evening reflection section |
-| [Quick Capture](skills/quick-capture/) | Zero-friction capture — say what's on your mind and it gets filed in the right place in your vault and task manager |
+| [Quick Capture](skills/quick-capture/) | Zero-friction capture. Say what's on your mind and it gets filed in the right place in your vault and task manager |
 | [Task Manager](skills/task-manager/) | Manages tasks across Apple Reminders and your vault with Eisenhower matrix prioritization and calendar-aware planning |
 | [Inbox Processing](skills/inbox-processing/) | Scans Gmail and Slack for action items and surfaces what actually needs your attention |
 | [Meeting Notes](skills/meeting-notes/) | Prep briefs before meetings, structured capture during/after, and action item tracking with people notes |
 | [Project Setup](skills/project-setup/) | Creates project notes from a template with goals, milestones, task breakdown, and vault linking |
 | [Weekly Review](skills/weekly-review/) | Synthesizes your week from daily notes, previews next week's calendar, and guides you through planning |
-| [Vault Context](skills/vault-context/) | Scans your recent vault activity to understand momentum, stuck items, and patterns — feeds every other skill |
+| [Vault Context](skills/vault-context/) | Scans your recent vault activity to understand momentum, stuck items, and patterns. Feeds every other skill. |
 
 ---
 
@@ -44,8 +46,8 @@ Then run `/ea-agent:setup` to complete onboarding (~5 minutes).
 
 ### Prerequisites
 
-- **macOS** — required for Apple Reminders and Calendar integration via AppleScript
-- **Obsidian** — [obsidian.md](https://obsidian.md)
+- **macOS**. Required for Apple Reminders and Calendar integration via AppleScript
+- **Obsidian**. [obsidian.md](https://obsidian.md)
 - **Claude Code** with MCP support
 
 ### 1. Install the plugin
@@ -62,7 +64,7 @@ When prompted, enter the full path to your Obsidian vault (e.g. `/Users/yourname
 /ea-agent:setup
 ```
 
-This walks you through a short questionnaire and writes `EA_PROFILE.md` to your vault root. Every skill reads this file to personalise its behavior — your folder structure, your task lists, your tools, your working style.
+This walks you through a short questionnaire and writes `EA_PROFILE.md` to your vault root. Every skill reads this file to personalise its behavior. Your folder structure, your task lists, your tools, your working style.
 
 Re-run `/ea-agent:setup` any time to update your profile. It will automatically detect plugin upgrades and only ask about new fields.
 
@@ -72,7 +74,7 @@ In Claude's MCP settings, connect the tools you want:
 
 | Tool | Required for |
 |------|-------------|
-| **Control your Mac** (`osascript`) | Apple Reminders and Calendar — required for task management |
+| **Control your Mac** (`osascript`) | Apple Reminders and Calendar, required for task management |
 | **Slack** | Inbox processing, morning briefings, evening check-ins |
 | **Gmail** | Inbox processing |
 | **Google Calendar** | Supplemental calendar (Apple Calendar is the primary source) |
@@ -89,7 +91,7 @@ For a fully automated EA, set up scheduled tasks in Claude's Scheduled section:
 | Evening Reflection | 8:00 PM daily | DMs you reflection prompts based on your day |
 | Weekly Review | 4:00 PM Fridays | Creates weekly review note, DMs you the highlights |
 
-After creating each task, click **Run now** once to pre-approve tool permissions — otherwise the first automatic run will pause waiting for your approval.
+After creating each task, click **Run now** once to pre-approve tool permissions. Otherwise the first automatic run will pause waiting for your approval.
 
 ### 5. Test it
 
@@ -99,7 +101,7 @@ Say **"Good morning, let's plan my day"** in Claude Code. You should get a daily
 
 ## How the EA learns about you
 
-When you run `/ea-agent:setup`, your answers are saved to `EA_PROFILE.md` in your vault root. This file is your EA's memory — it's plain markdown, so you can read and edit it directly.
+When you run `/ea-agent:setup`, your answers are saved to `EA_PROFILE.md` in your vault root. This file is your EA's memory. It's plain markdown, so you can read and edit it directly.
 
 Over time, the **Vault Context** skill adds observations to your profile as it learns your patterns:
 
@@ -114,7 +116,7 @@ These accumulate in an `## EA Observations` section of your profile and make eve
 
 ## Vault structure
 
-The EA expects — or will help you create — a folder structure like this:
+The EA expects. Or will help you create. A folder structure like this:
 
 ```
 Your Vault/
@@ -131,7 +133,7 @@ Your Vault/
 └── Templates/
 ```
 
-Folder names are fully configurable — setup asks what you actually use.
+Folder names are fully configurable. Setup asks what you actually use.
 
 ---
 
@@ -139,10 +141,10 @@ Folder names are fully configurable — setup asks what you actually use.
 
 The `templates/` folder contains Obsidian-compatible markdown templates:
 
-- `daily-note.md` — Morning planning + evening reflection
-- `weekly-review.md` — End-of-week check-in with metrics and priorities
-- `meeting-notes.md` — Agenda, notes, decisions, and action items
-- `project.md` — Project overview with goals, milestones, and tasks
+- `daily-note.md`. Morning planning + evening reflection
+- `weekly-review.md`. End-of-week check-in with metrics and priorities
+- `meeting-notes.md`. Agenda, notes, decisions, and action items
+- `project.md`. Project overview with goals, milestones, and tasks
 
 Copy these into your vault's `Templates/` folder.
 
@@ -150,11 +152,11 @@ Copy these into your vault's `Templates/` folder.
 
 ## Day-to-day usage
 
-- **Morning** — The 8 AM briefing creates your daily note. Review priorities, start working.
-- **During the day** — "Remind me to..." or "Note to self..." — filed to your vault and task manager instantly.
-- **Stuck or overwhelmed** — "What should I focus on?" — your EA pulls tasks, calendar, and deadlines and gives you a realistic plan.
-- **Evening** — The 8 PM check-in prompts your reflection. Fill in the evening section of your daily note.
-- **Friday** — The weekly review synthesizes your week and sets you up for the next one.
+- **Morning**. The 8 AM briefing creates your daily note. Review priorities, start working.
+- **During the day**. "Remind me to..." or "Note to self...". Filed to your vault and task manager instantly.
+- **Stuck or overwhelmed**. "What should I focus on?". Your EA pulls tasks, calendar, and deadlines and gives you a realistic plan.
+- **Evening**. The 8 PM check-in prompts your reflection. Fill in the evening section of your daily note.
+- **Friday**. The weekly review synthesizes your week and sets you up for the next one.
 
 ---
 
@@ -164,7 +166,7 @@ Copy these into your vault's `Templates/` folder.
 /ea-agent:setup
 ```
 
-The setup skill checks your profile version and only asks about new fields — it won't make you repeat the whole onboarding.
+The setup skill checks your profile version and only asks about new fields. It won't make you repeat the whole onboarding.
 
 ---
 
@@ -240,13 +242,13 @@ Follows [Semantic Versioning](https://semver.org/).
 ./scripts/bump-version.sh major    # 1.2.0 → 2.0.0  (breaking profile schema changes)
 ```
 
-Use `major` when bumping `profile_version` in `skills/setup/SKILL.md` — this signals to existing users that they need to re-run `/ea-agent:setup`.
+Use `major` when bumping `profile_version` in `skills/setup/SKILL.md`. This signals to existing users that they need to re-run `/ea-agent:setup`.
 
 ---
 
 ## Philosophy
 
-Your Obsidian vault is the single source of truth for your work and life. Claude acts as your EA — not just following instructions, but noticing when you're overloaded, carrying forward what slipped, briefing you in the morning, and checking in at the end of the day.
+Your Obsidian vault is the single source of truth for your work and life. Claude acts as your EA. Not just following instructions, but noticing when you're overloaded, carrying forward what slipped, briefing you in the morning, and checking in at the end of the day.
 
 A good EA is proactive, remembers context across days, and gets better the longer they work with you. That's what this plugin is built to enable.
 
@@ -254,11 +256,11 @@ A good EA is proactive, remembers context across days, and gets better the longe
 
 ## Contributing
 
-This project is open for others to **fork and adapt** for their own use — that is the primary use case for anyone other than the maintainer.
+This project is open for others to **fork and adapt** for their own use. That is the primary use case for anyone other than the maintainer.
 
 A few things to keep in mind if contributing:
 
-- Skills must work for anyone — no hardcoded personal info (that belongs in `EA_PROFILE.md`)
+- Skills must work for anyone. No hardcoded personal info (that belongs in `EA_PROFILE.md`)
 - Keep the EA tone: conversational, proactive, not robotic
 - When adding new profile fields, bump `profile_version` in the setup skill and handle the upgrade path
 

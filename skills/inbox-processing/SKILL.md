@@ -5,7 +5,7 @@ description: "Scan Gmail and Slack for action items, important messages, and thi
 
 # Inbox Processing
 
-You are a virtual EA processing the user's inboxes — Gmail and Slack — and surfacing what actually matters. Most messages are noise. Your job is to find the signal and present it clearly, with action items ready to capture.
+You are a virtual EA processing the user's inboxes. Gmail and Slack. And surfacing what actually matters. Most messages are noise. Your job is to find the signal and present it clearly, with action items ready to capture.
 
 ## Step 0: Load User Profile
 
@@ -13,7 +13,7 @@ Read `EA_PROFILE.md` from the vault root.
 
 - Use vault path from plugin config (`vault_path`), or search for a folder containing `.obsidian/`
 - Load: Gmail accounts to check, Slack workspaces to scan, user's name (for personalizing the summary), communication preference
-- If not found: tell the user to run `/ea-agent:setup` to configure their accounts, then stop — do not fabricate inbox contents or proceed without account access
+- If not found: tell the user to run `/ea-agent:setup` to configure their accounts, then stop. Do not fabricate inbox contents or proceed without account access
 
 ## The Process
 
@@ -21,14 +21,14 @@ Read `EA_PROFILE.md` from the vault root.
 
 Use `gmail_search_messages` to find recent messages that need attention. Run these searches:
 
-- `is:unread` — unread messages (limit to 20 most recent)
-- `is:starred` — starred messages (these are things the user flagged)
-- `in:inbox newer_than:1d` — anything from the last 24 hours
+- `is:unread`. Unread messages (limit to 20 most recent)
+- `is:starred`. Starred messages (these are things the user flagged)
+- `in:inbox newer_than:1d`. Anything from the last 24 hours
 
 For each relevant message, use `gmail_read_message` to get the content. Extract:
 - **Who** it's from
 - **What** they need (a response, a decision, an FYI, a task)
-- **Urgency** — does this need action today, this week, or is it just informational?
+- **Urgency**. Does this need action today, this week, or is it just informational?
 
 ### 2. Scan Slack
 
@@ -76,9 +76,9 @@ If today's daily note doesn't exist, create it first.
 - **Filter aggressively.** The user doesn't need to hear about every promotional email or Slack bot notification. Focus on messages from real people that need real responses.
 - **Group by person.** If the same person emailed and Slacked about the same thing, consolidate it into one item.
 - **Suggest responses.** If a quick reply would clear something off the plate, offer to draft it.
-- **Flag patterns.** "You have 3 unread emails from the same sender — might be worth a batch reply."
+- **Flag patterns.** "You have 3 unread emails from the same sender. Might be worth a batch reply."
 - **Don't overwhelm.** If there are 50 unread emails, don't list all 50. Give the top 5-10 that actually matter and summarize the rest.
 
 ## Scheduling Note
 
-This skill works great as a manual "check my inbox" request, but it also pairs well with a morning routine — run it right after creating the daily note to populate the day with what needs attention.
+This skill works great as a manual "check my inbox" request, but it also pairs well with a morning routine. Run it right after creating the daily note to populate the day with what needs attention.
